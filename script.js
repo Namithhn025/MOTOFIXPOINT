@@ -2,12 +2,18 @@
 // MOTOFIXPOINT — MAIN SCRIPT
 // ============================================
 
-// ===== ENTRY MODAL =====
+// ===== ENTRY MODAL (1-hour TTL) =====
 (function () {
   const modal = document.getElementById('entryModal');
-  // If user already provided number this session, skip modal
-  if (sessionStorage.getItem('mfp_entered')) {
+  const KEY = 'mfp_entered_at';
+  const TTL_MS = 60 * 60 * 1000; // 1 hour
+  const lastEntered = localStorage.getItem(KEY);
+  if (lastEntered && (Date.now() - parseInt(lastEntered, 10)) < TTL_MS) {
+    // Within 1 hour — skip modal
     modal.classList.add('hidden');
+  } else {
+    // Show modal, lock scroll
+    document.body.style.overflow = 'hidden';
   }
 })();
 
@@ -16,9 +22,10 @@ function handleEntrySubmit(e) {
   const phone = document.getElementById('entryPhone').value.trim();
   if (!phone || phone.length < 10) return;
 
-  // Save number (replace with your backend / Google Sheet integration)
-  sessionStorage.setItem('mfp_entered', '1');
-  sessionStorage.setItem('mfp_phone', phone);
+  // Store with timestamp for 1-hr TTL
+  localStorage.setItem('mfp_entered_at', Date.now().toString());
+  localStorage.setItem('mfp_phone', phone);
+  // TODO: send phone to your Google Sheet / backend form URL here
   console.log('Lead captured:', phone);
 
   // Smooth dismiss
@@ -26,6 +33,29 @@ function handleEntrySubmit(e) {
   modal.classList.add('hidden');
   document.body.style.overflow = '';
 }
+
+// ===== ROTATING LOCATION BADGE =====
+(function () {
+  const locations = [
+    'Electronic City, Bengaluru',
+    'HSR Layout, Bengaluru',
+    'Bommasandra, Bengaluru',
+    'BTM Layout, Bengaluru'
+  ];
+  const el = document.getElementById('locationText');
+  if (!el) return;
+  let i = 0;
+  setInterval(() => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-8px)';
+    setTimeout(() => {
+      i = (i + 1) % locations.length;
+      el.textContent = locations[i];
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, 300);
+  }, 2500);
+})();
 
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById('navbar');

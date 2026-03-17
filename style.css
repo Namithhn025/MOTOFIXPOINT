@@ -16,7 +16,7 @@
     --red: #FA2D05;
     --red-light: #FF5A36;
     --red-dark: #CC1E00;
-    --accent: #FF8000;
+    --accent: #E8180A;
     --black: #0d0d0d;
     --dark: #111111;
     --dark2: #1a1a1a;
@@ -1868,4 +1868,10 @@ ul {
     z-index: 0;
     object-fit: cover;
     opacity: 0.6; /* Slight transparency so colors blend */
+}
+
+/* ===== LOCATION BADGE TRANSITION ===== */
+#locationText {
+    display: inline-block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
