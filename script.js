@@ -2,6 +2,31 @@
 // MOTOFIXPOINT — MAIN SCRIPT
 // ============================================
 
+// ===== ENTRY MODAL =====
+(function () {
+  const modal = document.getElementById('entryModal');
+  // If user already provided number this session, skip modal
+  if (sessionStorage.getItem('mfp_entered')) {
+    modal.classList.add('hidden');
+  }
+})();
+
+function handleEntrySubmit(e) {
+  e.preventDefault();
+  const phone = document.getElementById('entryPhone').value.trim();
+  if (!phone || phone.length < 10) return;
+
+  // Save number (replace with your backend / Google Sheet integration)
+  sessionStorage.setItem('mfp_entered', '1');
+  sessionStorage.setItem('mfp_phone', phone);
+  console.log('Lead captured:', phone);
+
+  // Smooth dismiss
+  const modal = document.getElementById('entryModal');
+  modal.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -108,7 +133,7 @@ function handleFormSubmit(e) {
     [document.getElementById('fname'), document.getElementById('fphone'),
      document.getElementById('fvehicle-type'), document.getElementById('fbike')].forEach(field => {
       if (!field.value.trim()) {
-        field.style.borderColor = '#B22222';
+        field.style.borderColor = '#FA2D05';
         field.addEventListener('input', () => field.style.borderColor = '', { once: true });
       }
     });

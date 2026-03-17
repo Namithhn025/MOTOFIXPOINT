@@ -104,6 +104,18 @@
 </head>
 
 <body>
+    <!-- ===== ENTRY MODAL ===== -->
+    <div class="entry-modal-overlay" id="entryModal">
+        <div class="entry-modal-content">
+            <img src="assets/logo.png" alt="MotoFixPoint Logo" class="entry-modal-logo" onerror="this.style.display='none'" />
+            <h2>Welcome to MotoFixPoint</h2>
+            <p>Please enter your phone number. We will connect with you shortly for any car or bike services.</p>
+            <form id="entryForm" onsubmit="handleEntrySubmit(event)">
+                <input type="tel" id="entryPhone" placeholder="Enter your mobile number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit number" />
+                <button type="submit" class="btn-primary btn-full">Enter Website</button>
+            </form>
+        </div>
+    </div>
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
@@ -134,6 +146,9 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero" id="home" aria-label="Hero section">
+        <video autoplay loop muted playsinline class="hero-bg-video">
+            <source src="https://videos.pexels.com/video-files/4057868/4057868-hd_1920_1080_25fps.mp4" type="video/mp4" />
+        </video>
         <div class="hero-overlay"></div>
         <div class="hero-bg-pattern"></div>
         <div class="hero-content">
@@ -532,7 +547,7 @@
                         completed everything ahead of time. Best car service near Electronic City. Highly recommended!"
                     </p>
                     <div class="t-author">
-                        <div class="t-avatar" style="background: #8B1A1A;">AK</div>
+                        <div class="t-avatar" style="background: #FA2D05;">AK</div>
                         <div>
                             <strong>Arjun Kumar</strong>
                             <span>Maruti Suzuki Swift Dzire owner</span>
@@ -545,7 +560,7 @@
                         one day. Mechanics really know their stuff. The bike feels brand new. Great workshop in ECity!"
                     </p>
                     <div class="t-author">
-                        <div class="t-avatar" style="background: #5a1212;">SP</div>
+                        <div class="t-avatar" style="background: #CC1E00;">SP</div>
                         <div>
                             <strong>Sneha Prasad</strong>
                             <span>Royal Enfield Meteor owner</span>
@@ -557,7 +572,7 @@
                     <p>"Excellent car wash and denting job on my Hyundai Creta. Paint job looks showroom-fresh. They're
                         honest about pricing and didn't charge for anything unnecessary. Will come back for sure!"</p>
                     <div class="t-author">
-                        <div class="t-avatar" style="background: #2d0a0a;">RV</div>
+                        <div class="t-avatar" style="background: #891400;">RV</div>
                         <div>
                             <strong>Rahul Verma</strong>
                             <span>Hyundai Creta owner</span>
