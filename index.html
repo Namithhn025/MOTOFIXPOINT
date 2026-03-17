@@ -109,10 +109,13 @@
         <div class="entry-modal-content">
             <img src="assets/logo.png" alt="MotoFixPoint Logo" class="entry-modal-logo" onerror="this.style.display='none'" />
             <h2>Welcome to MotoFixPoint</h2>
-            <p>Please enter your phone number. We will connect with you shortly for any car or bike services.</p>
+            <p><strong>Real-time doorstep repairs</strong><br>We come to you — home, office or roadside.</p>
             <form id="entryForm" onsubmit="handleEntrySubmit(event)">
-                <input type="tel" id="entryPhone" placeholder="Enter your mobile number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit number" />
-                <button type="submit" class="btn-primary btn-full">Enter Website</button>
+                <div class="phone-input-wrapper">
+                    <span class="prefix">+91</span>
+                    <input type="tel" id="entryPhone" placeholder="Mobile Number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit number" />
+                </div>
+                <button type="submit" class="btn-primary btn-full">Connect with Mechanic</button>
             </form>
         </div>
     </div>
@@ -147,7 +150,7 @@
     <!-- ===== HERO ===== -->
     <section class="hero" id="home" aria-label="Hero section">
         <video autoplay loop muted playsinline class="hero-bg-video">
-            <source src="https://videos.pexels.com/video-files/4057868/4057868-hd_1920_1080_25fps.mp4" type="video/mp4" />
+            <source src="assets/hero-video.mp4" type="video/mp4" />
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-bg-pattern"></div>
@@ -160,9 +163,9 @@
                 <span class="hero-title-accent">Near You — Done Right.</span>
             </h1>
             <p class="hero-subtitle">
-                Real-time doorstep repairs — book a certified mechanic in 30 seconds.
-                We come to you — home, office, or roadside.
-                Serving <strong>Electronic City, HSR Layout, Bommasandra &amp; BTM Layout.</strong>
+                <strong>Real-time doorstep repairs</strong><br>
+                Book a certified mechanic in 30 seconds. We come to you — home, office or roadside.<br>
+                Serving <span>Electronic City, HSR Layout, Bommasandra &amp; BTM Layout.</span>
             </p>
             <div class="hero-stats">
                 <div class="stat">
@@ -185,55 +188,34 @@
                 <a href="#services" class="btn-secondary" id="heroServicesBtn">View Services</a>
             </div>
         </div>
-        <div class="hero-image-side">
-            <div class="hero-img-wrapper">
-                <img src="assets/hero.jpg" alt="MotoFixPoint car and bike repair workshop in Electronic City Bengaluru"
-                    class="hero-img" onerror="this.parentElement.classList.add('img-fallback')" />
-                <div class="hero-img-card">
-                    <div class="card-icon">⚙️</div>
-                    <div>
-                        <strong>Next Available Slot</strong>
-                        <span>Today — Walk In or Book Now</span>
-                    </div>
-                </div>
+
+
+
+        <!-- Moved Marquee inside Hero for instant visibility -->
+        <div class="marquee-strip" aria-hidden="true">
+            <div class="marquee-track">
+                <span>🔧 Car Repair</span><span>•</span>
+                <span>🏍️ Bike Repair</span><span>•</span>
+                <span>🚿 Car Wash</span><span>•</span>
+                <span>✨ Bike Wash</span><span>•</span>
+                <span>⚙️ Engine Repair</span><span>•</span>
+                <span>🛞 Tyre Change</span><span>•</span>
+                <span>🔋 Battery Service</span><span>•</span>
+                <span>🎨 Denting &amp; Painting</span><span>•</span>
+                <span>⚡ Electrical Repair</span><span>•</span>
             </div>
-        </div>
-        <div class="hero-scroll-hint" aria-hidden="true">
-            <span>Scroll to explore</span>
-            <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <!-- ===== MARQUEE STRIP ===== -->
-    <div class="marquee-strip" aria-hidden="true">
-        <div class="marquee-track">
-            <span>🔧 Car Repair</span><span>•</span>
-            <span>🏍️ Bike Repair</span><span>•</span>
-            <span>🚿 Car Wash</span><span>•</span>
-            <span>✨ Bike Wash</span><span>•</span>
-            <span>⚙️ Engine Repair</span><span>•</span>
-            <span>🛞 Tyre Change</span><span>•</span>
-            <span>🔋 Battery Service</span><span>•</span>
-            <span>🎨 Denting &amp; Painting</span><span>•</span>
-            <span>⚡ Electrical Repair</span><span>•</span>
-            <span>🔧 Car Repair</span><span>•</span>
-            <span>🏍️ Bike Repair</span><span>•</span>
-            <span>🚿 Car Wash</span><span>•</span>
-            <span>✨ Bike Wash</span><span>•</span>
-            <span>⚙️ Engine Repair</span><span>•</span>
-            <span>🛞 Tyre Change</span><span>•</span>
-            <span>🔋 Battery Service</span><span>•</span>
-        </div>
-    </div>
+
 
     <!-- ===== SERVICES ===== -->
     <section class="section services-section" id="services" aria-label="Our services">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">What We Do</span>
-                <h2 class="section-title">Car &amp; Bike <span class="accent">Services</span> in Electronic City</h2>
-                <p class="section-sub">From routine car service to complex engine overhauls — bikes or cars, we handle
-                    it all with precision at our Electronic City workshop.</p>
+                <h2 class="section-title">Car &amp; Bike <span class="accent">Services</span> Near You</h2>
+                <p class="section-sub">From routine servicing to complex engine overhauls — we handle it all with precision across <strong>Electronic City, HSR Layout, Bommasandra &amp; BTM.</strong></p>
             </div>
 
             <!-- Service type toggle -->
