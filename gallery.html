@@ -145,16 +145,22 @@
             <p class="section-sub">Witness the journey from repair to perfection. Sorted by our latest high-impact projects.</p>
         </div>
 
-        <div class="gallery-filter">
-            <button class="filter-btn active" onclick="filterGallery('all')">View All</button>
-            <button class="filter-btn" onclick="filterGallery('bike')">Bikes</button>
-            <button class="filter-btn" onclick="filterGallery('car')">Cars</button>
-            <button class="filter-btn" onclick="filterGallery('ev')">Electric (EV)</button>
-        </div>
-
         <div id="galleryContainer">
-            <!-- Sample Record 1: Bike -->
-            <div class="vehicle-section" data-type="bike">
+            <!-- Project 1: Aluminium welding -->
+            <div class="vehicle-section">
+                <div class="vehicle-info">
+                    <h3>Aluminium Welding • Specialized Structural Repair</h3>
+                    <span class="tag">Special Service</span>
+                </div>
+                <div class="gallery-grid-full">
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Welding+Process+1" alt="Welding 1"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Welding+Process+2" alt="Welding 2"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Finished+Work" alt="Welding 3"></div>
+                </div>
+            </div>
+
+            <!-- More projects can be added here -->
+             <div class="vehicle-section">
                 <div class="vehicle-info">
                     <h3>TVS Apache RTR 200 • Full Transformation</h3>
                     <span class="tag">Performance Bike</span>
@@ -166,8 +172,7 @@
                 </div>
             </div>
 
-            <!-- Sample Record 2: Car -->
-            <div class="vehicle-section" data-type="car">
+            <div class="vehicle-section">
                 <div class="vehicle-info">
                     <h3>Honda City • Deep Engine Clean</h3>
                     <span class="tag">Premium Car</span>
@@ -178,8 +183,6 @@
                     <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Engine+After" alt="Car 3"></div>
                 </div>
             </div>
-            
-            <!-- More records will follow based on Form 3 submissions -->
         </div>
     </main>
 
@@ -189,22 +192,6 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        function filterGallery(type) {
-            // Update buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // Filter sections
-            const sections = document.querySelectorAll('.vehicle-section');
-            sections.forEach(section => {
-                if (type === 'all' || section.getAttribute('data-type') === type) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-        }
     </script>
 </body>
 </html>
