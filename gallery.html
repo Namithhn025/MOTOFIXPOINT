@@ -142,46 +142,13 @@
         <div class="section-header" style="text-align: center; margin-bottom: 60px;">
             <span class="section-tag">Transformation Gallery</span>
             <h2 class="section-title">Workshop <span class="accent">Masterpieces</span></h2>
-            <p class="section-sub">Witness the journey from repair to perfection. Sorted by our latest high-impact projects.</p>
+            <p class="section-sub">Witness the journey from repair to perfection. This gallery updates automatically from our latest workshop records.</p>
         </div>
 
         <div id="galleryContainer">
-            <!-- Project 1: Aluminium welding -->
-            <div class="vehicle-section">
-                <div class="vehicle-info">
-                    <h3>Aluminium Welding • Specialized Structural Repair</h3>
-                    <span class="tag">Special Service</span>
-                </div>
-                <div class="gallery-grid-full">
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Welding+Process+1" alt="Welding 1"></div>
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Welding+Process+2" alt="Welding 2"></div>
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Finished+Work" alt="Welding 3"></div>
-                </div>
-            </div>
-
-            <!-- More projects can be added here -->
-             <div class="vehicle-section">
-                <div class="vehicle-info">
-                    <h3>TVS Apache RTR 200 • Full Transformation</h3>
-                    <span class="tag">Performance Bike</span>
-                </div>
-                <div class="gallery-grid-full">
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Process+1" alt="Bike 1"></div>
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Process+2" alt="Bike 2"></div>
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Final+Result" alt="Bike 3"></div>
-                </div>
-            </div>
-
-            <div class="vehicle-section">
-                <div class="vehicle-info">
-                    <h3>Honda City • Deep Engine Clean</h3>
-                    <span class="tag">Premium Car</span>
-                </div>
-                <div class="gallery-grid-full">
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Engine+Before" alt="Car 1"></div>
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=During+Service" alt="Car 2"></div>
-                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Engine+After" alt="Car 3"></div>
-                </div>
+            <!-- Dynamic projects will be injected here -->
+            <div id="galleryLoading" style="text-align: center; padding: 50px; color: var(--mid);">
+                <p>Loading the latest transformations...</p>
             </div>
         </div>
     </main>
@@ -192,6 +159,69 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxSVACJI48Iec-Bnx4bvscsjkKLHoHTPfKsBuotvpg8I0jPWBTDuVKLQxpjHHXcOSy1cdpBCyp9ary/pub?output=csv';
+
+        async function fetchGallery() {
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                const data = await response.text();
+                const rows = data.split('\n').slice(1); // Skip header
+
+                const container = document.getElementById('galleryContainer');
+                const loading = document.getElementById('galleryLoading');
+                
+                let html = '';
+
+                rows.forEach(row => {
+                    // Simple CSV parser (handles commas within quotes if needed, but basic for now)
+                    const columns = row.split(',');
+                    if (columns.length < 4) return;
+
+                    const vehicleName = columns[1];
+                    const priority = columns[2];
+                    const rawImages = columns[3]; // This could be filenames OR URLs
+
+                    // Find Google Drive IDs if URLs are present
+                    const driveIds = [];
+                    const driveIdRegex = /\/d\/([a-zA-Z0-9_-]+)/g;
+                    let match;
+                    while ((match = driveIdRegex.exec(rawImages)) !== null) {
+                        driveIds.push(match[1]);
+                    }
+
+                    if (vehicleName && driveIds.length > 0) {
+                        html += `
+                            <div class="vehicle-section">
+                                <div class="vehicle-info">
+                                    <h3>${vehicleName}</h3>
+                                    <span class="tag">Transformation Record</span>
+                                </div>
+                                <div class="gallery-grid-full">
+                                    ${driveIds.map(id => `
+                                        <div class="gallery-item">
+                                            <img src="https://lh3.googleusercontent.com/d/${id}" alt="${vehicleName}" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Image+Loading...'">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                if (html) {
+                    container.innerHTML = html;
+                } else {
+                    container.innerHTML = '<div style="text-align:center; padding:50px; color:var(--mid);">No transformation records found yet. Upload via the form to see results!</div>';
+                }
+
+            } catch (error) {
+                console.error('Gallery Fetch Error:', error);
+                document.getElementById('galleryContainer').innerHTML = '<p style="text-align:center; color:var(--red);">Error loading gallery. Please try again later.</p>';
+            }
+        }
+
+        fetchGallery();
     </script>
 </body>
 </html>
