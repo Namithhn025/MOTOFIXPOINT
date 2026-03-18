@@ -16,107 +16,164 @@
             padding-bottom: 100px;
         }
         
-        .gallery-filter {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--mid);
-            padding: 10px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .filter-btn.active {
-            background: var(--red);
-            border-color: var(--red);
-            color: var(--white);
-            box-shadow: 0 0 20px rgba(250, 5, 5, 0.3);
-        }
-
-        .vehicle-section {
-            margin-bottom: 80px;
+        /* Grid of Project Cards */
+        #galleryContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
             animation: fadeIn 0.8s ease;
         }
 
-        .vehicle-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-left: 4px solid var(--red);
-            padding-left: 20px;
-        }
-
-        .vehicle-info h3 {
-            font-size: 1.8rem;
-            color: var(--white);
-            margin: 0;
-        }
-
-        .vehicle-info .tag {
-            background: rgba(250, 5, 5, 0.1);
-            color: var(--red);
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .gallery-grid-full {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16/10;
-            cursor: pointer;
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            cursor: pointer;
             transition: var(--transition);
+            position: relative;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.02);
+        .project-card:hover {
+            transform: translateY(-10px);
             border-color: var(--red);
-            z-index: 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .gallery-item img {
+        .project-card-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+
+        .project-card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: 0.5s;
         }
 
-        .gallery-item-overlay {
-            position: absolute;
+        .project-card:hover .project-card-image img {
+            transform: scale(1.1);
+        }
+
+        .project-card-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .project-card-info h3 {
+            font-size: 1.4rem;
+            margin: 0;
+            color: var(--white);
+        }
+
+        .project-card-count {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--red);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Lightbox Styling */
+        .lightbox-overlay {
+            position: fixed;
             inset: 0;
-            background: linear-gradient(to top, rgba(13, 13, 13, 0.9), transparent);
-            display: flex;
-            align-items: flex-end;
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
             opacity: 0;
             transition: 0.4s;
         }
 
-        .gallery-item:hover .gallery-item-overlay {
+        .lightbox-overlay.active {
+            display: flex;
             opacity: 1;
         }
+
+        .lightbox-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .lightbox-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            font-size: 2.5rem;
+            color: var(--white);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--red);
+            transform: scale(1.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .lightbox-prev { left: -80px; }
+        .lightbox-next { right: -80px; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1200px) {
+            .lightbox-nav { width: 50px; height: 50px; font-size: 1.2rem; }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
         }
     </style>
 </head>
@@ -142,16 +199,29 @@
         <div class="section-header" style="text-align: center; margin-bottom: 60px;">
             <span class="section-tag">Transformation Gallery</span>
             <h2 class="section-title">Workshop <span class="accent">Masterpieces</span></h2>
-            <p class="section-sub">Witness the journey from repair to perfection. This gallery updates automatically from our latest workshop records.</p>
+            <p class="section-sub">Witness the journey from repair to perfection. Click any project to view the transformation results.</p>
         </div>
 
         <div id="galleryContainer">
-            <!-- Dynamic projects will be injected here -->
-            <div id="galleryLoading" style="text-align: center; padding: 50px; color: var(--mid);">
-                <p>Loading the latest transformations...</p>
+            <!-- Dynamic project blocks will be injected here -->
+            <div id="galleryLoading" style="text-align: center; grid-column: 1/-1; padding: 50px; color: var(--mid);">
+                <p>Loading the workshop records...</p>
             </div>
         </div>
     </main>
+
+    <!-- Lightbox Structure -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <div class="lightbox-image-container">
+                <img id="lightboxImg" src="" alt="Transformation Gallery">
+            </div>
+            <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
+            <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</button>
+            <div id="lightboxCaption" style="margin-top: 20px; color: var(--white); font-weight: 700; font-size: 1.2rem;"></div>
+        </div>
+    </div>
 
     <footer style="margin-top: 50px; padding: 40px 0; background: var(--black); text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
         <p>&copy; <span id="year"></span> MotoFixPoint. All rights reserved.</p>
@@ -162,27 +232,26 @@
 
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxSVACJI48Iec-Bnx4bvscsjkKLHoHTPfKsBuotvpg8I0jPWBTDuVKLQxpjHHXcOSy1cdpBCyp9ary/pub?output=csv';
 
+        let currentProjectImages = [];
+        let currentIndex = 0;
+
         async function fetchGallery() {
             try {
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
-                const rows = data.split('\n').slice(1); // Skip header
+                const rows = data.split('\n').slice(1); 
 
                 const container = document.getElementById('galleryContainer');
-                const loading = document.getElementById('galleryLoading');
-                
                 let html = '';
 
                 rows.forEach(row => {
-                    // Simple CSV parser (handles commas within quotes if needed, but basic for now)
                     const columns = row.split(',');
                     if (columns.length < 4) return;
 
                     const vehicleName = columns[1];
-                    const priority = columns[2];
-                    const rawImages = columns[3]; // This could be filenames OR URLs
+                    const rawImages = columns[3]; 
 
-                    // Find Google Drive IDs if URLs are present
+                    // Extract IDs
                     const driveIds = [];
                     const driveIdRegex = /\/d\/([a-zA-Z0-9_-]+)/g;
                     let match;
@@ -191,35 +260,61 @@
                     }
 
                     if (vehicleName && driveIds.length > 0) {
+                        const coverImg = `https://lh3.googleusercontent.com/d/${driveIds[0]}`;
+                        const allImgsJson = JSON.stringify(driveIds);
+                        
                         html += `
-                            <div class="vehicle-section">
-                                <div class="vehicle-info">
-                                    <h3>${vehicleName}</h3>
-                                    <span class="tag">Transformation Record</span>
+                            <div class="project-card" onclick='openLightbox("${vehicleName}", ${allImgsJson})'>
+                                <div class="project-card-image">
+                                    <img src="${coverImg}" alt="${vehicleName}" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Image+Not+Public'">
                                 </div>
-                                <div class="gallery-grid-full">
-                                    ${driveIds.map(id => `
-                                        <div class="gallery-item">
-                                            <img src="https://lh3.googleusercontent.com/d/${id}" alt="${vehicleName}" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Image+Loading...'">
-                                        </div>
-                                    `).join('')}
+                                <div class="project-card-info">
+                                    <h3>${vehicleName}</h3>
+                                    <span class="project-card-count">${driveIds.length} Photos</span>
                                 </div>
                             </div>
                         `;
                     }
                 });
 
-                if (html) {
-                    container.innerHTML = html;
-                } else {
-                    container.innerHTML = '<div style="text-align:center; padding:50px; color:var(--mid);">No transformation records found yet. Upload via the form to see results!</div>';
-                }
+                container.innerHTML = html || '<div style="text-align:center; padding:50px; grid-column:1/-1; color:var(--mid);">No records found. Upload via form with public links!</div>';
 
             } catch (error) {
-                console.error('Gallery Fetch Error:', error);
-                document.getElementById('galleryContainer').innerHTML = '<p style="text-align:center; color:var(--red);">Error loading gallery. Please try again later.</p>';
+                console.error('Fetch Error:', error);
+                document.getElementById('galleryContainer').innerHTML = '<p style="text-align:center; grid-column:1/-1; color:var(--red);">Error loading gallery.</p>';
             }
         }
+
+        function openLightbox(name, ids) {
+            currentProjectImages = ids;
+            currentIndex = 0;
+            document.getElementById('lightboxCaption').textContent = name;
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightboxImage() {
+            const id = currentProjectImages[currentIndex];
+            document.getElementById('lightboxImg').src = `https://lh3.googleusercontent.com/d/${id}`;
+        }
+
+        function changeImage(dir) {
+            currentIndex += dir;
+            if (currentIndex < 0) currentIndex = currentProjectImages.length - 1;
+            if (currentIndex >= currentProjectImages.length) currentIndex = 0;
+            updateLightboxImage();
+        }
+
+        // Close on overlay click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
 
         fetchGallery();
     </script>
