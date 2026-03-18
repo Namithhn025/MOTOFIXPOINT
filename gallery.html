@@ -239,19 +239,21 @@
             try {
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
+                
+                // Better CSV Splitter (handles quotes)
                 const rows = data.split('\n').slice(1); 
-
                 const container = document.getElementById('galleryContainer');
                 let html = '';
 
                 rows.forEach(row => {
-                    const columns = row.split(',');
-                    if (columns.length < 4) return;
+                    // This regex splits by commas but ignores commas inside quotes
+                    const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+                    if (!columns || columns.length < 4) return;
 
-                    const vehicleName = columns[1];
-                    const rawImages = columns[3]; 
+                    const vehicleName = columns[1].replace(/"/g, '').trim();
+                    const rawImages = columns[3].replace(/"/g, '').trim(); // Get the quoted block of URLs
 
-                    // Extract IDs
+                    // Extract IDs from the entire block
                     const driveIds = [];
                     const driveIdRegex = /\/d\/([a-zA-Z0-9_-]+)/g;
                     let match;
