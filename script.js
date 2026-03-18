@@ -37,10 +37,11 @@ function handleEntrySubmit(e) {
 // ===== ROTATING LOCATION BADGE =====
 (function () {
   const locations = [
+    'Garebhavipalya, Bengaluru',
+    'Hongasandra, Bengaluru',
+    'Bommanahalli, Bengaluru',
     'Electronic City, Bengaluru',
-    'HSR Layout, Bengaluru',
-    'Bommasandra, Bengaluru',
-    'BTM Layout, Bengaluru'
+    'HSR Layout, Bengaluru'
   ];
   const el = document.getElementById('locationText');
   if (!el) return;

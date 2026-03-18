@@ -107,8 +107,67 @@
             padding: 60px;
             background: linear-gradient(135deg, var(--dark2) 0%, var(--dark) 100%);
             border-radius: var(--radius-lg);
-            text-align: center;
-            border: 1px dashed rgba(250, 5, 5, 0.3);
+            border: 1px solid rgba(250, 5, 5, 0.2);
+            box-shadow: var(--shadow-red);
+        }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: left;
+            background: var(--dark3);
+            padding: 40px;
+            border-radius: var(--radius);
+            border: 1px solid var(--red);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .contact-field {
+            margin-bottom: 24px;
+        }
+
+        .contact-field label {
+            display: block;
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+        }
+
+        .contact-field input, .contact-field textarea {
+            width: 100%;
+            background: rgba(13, 13, 13, 0.6) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--white) !important;
+            padding: 14px 18px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .contact-field input:focus, .contact-field textarea:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 15px rgba(250, 5, 5, 0.2);
+            background: rgba(13, 13, 13, 0.9) !important;
+        }
+
+        .phone-input-wrapper {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        #selectedServiceName {
+            border-color: var(--red);
+            color: var(--red) !important;
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            cursor: default;
+            background: rgba(250, 5, 5, 0.05) !important;
         }
     </style>
 </head>
@@ -181,10 +240,10 @@
             <h2 class="section-title">Complete Your <span class="accent">Booking</span></h2>
             <p class="section-sub">We'll link your selected service to your contact details.</p>
             
-            <form id="serviceBookingForm" onsubmit="handleServiceBooking(event)" style="max-width: 600px; margin: 40px auto; text-align: left; background: var(--dark3); padding: 40px; border-radius: var(--radius); border: 1px solid var(--red);">
+            <form id="serviceBookingForm" class="booking-form" onsubmit="handleServiceBooking(event)">
                 <div class="contact-field">
                     <label>Selected Service</label>
-                    <input type="text" id="selectedServiceName" readonly style="background: rgba(13,13,13,0.5); border-color: var(--red); color: var(--red); font-weight: 700;">
+                    <input type="text" id="selectedServiceName" readonly value="General Service">
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
