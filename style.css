@@ -241,6 +241,15 @@ ul {
     color: rgba(255, 255, 255, 0.8);
     transition: color var(--transition);
     position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-links a.nav-active {
+    color: var(--red-light);
+}
+
+.nav-links a.nav-active::after {
+    width: 100%;
 }
 
 .nav-links a::after {
@@ -1787,22 +1796,41 @@ ul {
     margin-bottom: 24px;
     line-height: 1.5;
 }
-.entry-modal-content input {
-    width: 100%;
+.phone-input-wrapper {
+    display: flex;
+    align-items: center;
     background: var(--dark);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.phone-input-wrapper:focus-within {
+    border-color: var(--red);
+    box-shadow: 0 0 15px rgba(250, 5, 5, 0.2);
+}
+
+.phone-input-wrapper .prefix {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    padding: 14px 15px;
+    font-weight: 700;
+    font-size: 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.phone-input-wrapper input {
+    width: 100%;
+    background: transparent !important;
+    border: none !important;
     color: var(--white);
     font-size: 1rem;
     padding: 14px 16px;
-    margin-bottom: 16px;
-    text-align: center;
+    outline: none !important;
+    margin-bottom: 0 !important;
     letter-spacing: 2px;
-    outline: none;
-    transition: var(--transition);
-}
-.entry-modal-content input:focus {
-    border-color: var(--red);
 }
 
 /* ===== HERO VIDEO ===== */

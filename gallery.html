@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery | MotoFixPoint — Workshop Transformations</title>
+    <meta name="description" content="Witness the transformation. Our gallery showcases real bike and car repair projects from Electronic City Bengaluru." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .gallery-page-container {
+            padding-top: 150px;
+            padding-bottom: 100px;
+        }
+        .gallery-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            border-color: var(--red);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 13, 13, 0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: 0.4s;
+        }
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+        .gallery-item-overlay span {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" aria-label="MotoFixPoint Home">
+                <img src="assets/logo.png" alt="MotoFixPoint Logo" class="logo-img" />
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html" class="nav-active">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="tel:+919999999999" class="nav-cta">📞 Call Now</a>
+        </div>
+    </nav>
+
+    <main class="container gallery-page-container">
+        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+            <span class="section-tag">Transformation Gallery</span>
+            <h2 class="section-title">From Our <span class="accent">Workshop Floors</span></h2>
+            <p class="section-sub">Real work on premium cars and performance bikes across Electronic City and Bangalore.</p>
+        </div>
+
+        <div class="gallery-grid-full">
+            <div class="gallery-item" data-title="Car Engine Diagnostics">
+                <img src="assets/gallery/g1.jpg" alt="Car Maintenance" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Car+Service'">
+                <div class="gallery-item-overlay"><span>Car Engine Diagnostics</span></div>
+            </div>
+            <div class="gallery-item" data-title="Performance Bike Tuning">
+                <img src="assets/gallery/g2.jpg" alt="Bike Tuning" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Bike+Tuning'">
+                <div class="gallery-item-overlay"><span>Performance Bike Tuning</span></div>
+            </div>
+            <div class="gallery-item" data-title="High-Pressure Wash">
+                <img src="assets/gallery/g3.jpg" alt="Car Detail" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Car+Detail'">
+                <div class="gallery-item-overlay"><span>High-Pressure Detailing</span></div>
+            </div>
+            <div class="gallery-item" data-title="Full Service Overhaul">
+                <img src="assets/gallery/g4.jpg" alt="Workshop Operations" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Bike+Service'">
+                <div class="gallery-item-overlay"><span>Full Service Overhaul</span></div>
+            </div>
+            <div class="gallery-item" data-title="AC Repair & Gas Recharge">
+                <img src="assets/gallery/g5.jpg" alt="Car AC service" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=AC+Service'">
+                <div class="gallery-item-overlay"><span>AC Repair & Gas Recharge</span></div>
+            </div>
+            <div class="gallery-item" data-title="Expert Denting & Painting">
+                <img src="assets/gallery/g6.jpg" alt="Denting Paint" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Paint+Job'">
+                <div class="gallery-item-overlay"><span>Expert Denting & Painting</span></div>
+            </div>
+             <!-- Repeat or add more as needed -->
+             <div class="gallery-item" data-title="Custom Bike Detailing">
+                <img src="assets/gallery/g1.jpg" alt="Car Maintenance" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Custom+Work'">
+                <div class="gallery-item-overlay"><span>Custom Bike Detailing</span></div>
+            </div>
+            <div class="gallery-item" data-title="Premium Oil Change">
+                <img src="assets/gallery/g2.jpg" alt="Bike Tuning" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Oil+Change'">
+                <div class="gallery-item-overlay"><span>Premium Oil Change</span></div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="margin-top: 50px; padding: 40px 0; background: var(--black); text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+        <p>&copy; <span id="year"></span> MotoFixPoint. All rights reserved.</p>
+    </footer>
+
+    <script>
+         document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
