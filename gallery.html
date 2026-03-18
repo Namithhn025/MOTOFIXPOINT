@@ -15,81 +15,106 @@
             padding-top: 150px;
             padding-bottom: 100px;
         }
+
+        /* Skeleton Loader */
+        .skeleton {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 20px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
         
         /* Grid of Project Cards */
         #galleryContainer {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            gap: 40px;
             animation: fadeIn 0.8s ease;
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.02);
             border-color: var(--red);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .project-card-image {
             width: 100%;
             aspect-ratio: 16/10;
             overflow: hidden;
+            background: #111;
         }
 
         .project-card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.5s;
+            transition: 0.6s;
         }
 
         .project-card:hover .project-card-image img {
             transform: scale(1.1);
+            filter: brightness(1.1);
         }
 
         .project-card-info {
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
         }
 
         .project-card-info h3 {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             margin: 0;
             color: var(--white);
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .project-card-count {
             display: inline-block;
-            margin-top: 10px;
-            font-size: 0.8rem;
+            margin-top: 12px;
+            font-size: 0.75rem;
             color: var(--red);
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            padding: 4px 12px;
+            background: rgba(250, 5, 5, 0.1);
+            border-radius: 50px;
         }
 
         /* Lightbox Styling */
         .lightbox-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.96);
+            backdrop-filter: blur(25px);
             z-index: 9999;
             display: none;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: 0.4s;
+            transition: 0.5s;
         }
 
         .lightbox-overlay.active {
@@ -100,8 +125,8 @@
         .lightbox-content {
             position: relative;
             width: 90%;
-            max-width: 1000px;
-            height: 70vh;
+            max-width: 1100px;
+            height: 80vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -113,67 +138,79 @@
             align-items: center;
             justify-content: center;
             width: 100%;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         .lightbox-image-container img {
             max-width: 100%;
             max-height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            object-fit: contain;
         }
 
         .lightbox-close {
-            position: absolute;
-            top: -50px;
-            left: 0;
-            font-size: 2.5rem;
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
             color: var(--white);
-            background: none;
             border: none;
             cursor: pointer;
             transition: 0.3s;
+            z-index: 10001;
         }
 
         .lightbox-close:hover {
-            color: var(--red);
-            transform: scale(1.2);
+            background: var(--red);
+            transform: rotate(90deg);
         }
 
         .lightbox-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             color: var(--white);
-            border: none;
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 2rem;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10002;
         }
 
         .lightbox-nav:hover {
             background: var(--red);
-            color: var(--white);
+            border-color: var(--red);
+            box-shadow: 0 0 20px rgba(250, 5, 5, 0.4);
         }
 
-        .lightbox-prev { left: -80px; }
-        .lightbox-next { right: -80px; }
+        .lightbox-prev { left: -100px; }
+        .lightbox-next { right: -100px; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 1200px) {
-            .lightbox-nav { width: 50px; height: 50px; font-size: 1.2rem; }
-            .lightbox-prev { left: 10px; }
-            .lightbox-next { right: 10px; }
+        @media (max-width: 1300px) {
+            .lightbox-prev { left: 20px; }
+            .lightbox-next { right: 20px; }
+            .lightbox-close { top: 20px; left: 20px; }
         }
     </style>
 </head>
@@ -196,34 +233,34 @@
     </nav>
 
     <main class="container gallery-page-container">
-        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-            <span class="section-tag">Transformation Gallery</span>
-            <h2 class="section-title">Workshop <span class="accent">Masterpieces</span></h2>
-            <p class="section-sub">Witness the journey from repair to perfection. Click any project to view the transformation results.</p>
+        <div class="section-header" style="text-align: center; margin-bottom: 80px;">
+            <span class="section-tag" style="background: rgba(250,5,5,0.1); color:var(--red); padding: 5px 15px; border-radius: 50px; font-weight: 800; letter-spacing: 2px;">TRANSFORMATION GALLERY</span>
+            <h1 class="section-title" style="font-size: 4rem; margin-top: 20px;">WORKSHOP <span class="accent">MASTERPIECES</span></h1>
+            <p class="section-sub" style="max-width: 600px; margin: 20px auto;">Witness the journey from repair to perfection. Click any project to view the high-resolution transformation results.</p>
         </div>
 
         <div id="galleryContainer">
-            <!-- Dynamic project blocks will be injected here -->
-            <div id="galleryLoading" style="text-align: center; grid-column: 1/-1; padding: 50px; color: var(--mid);">
-                <p>Loading the workshop records...</p>
-            </div>
+            <!-- Skeletons load immediately -->
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
         </div>
     </main>
 
     <!-- Lightbox Structure -->
     <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
         <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
             <div class="lightbox-image-container">
-                <img id="lightboxImg" src="" alt="Transformation Gallery">
+                <img id="lightboxImg" src="" alt="Gallery Image">
             </div>
             <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
             <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</button>
-            <div id="lightboxCaption" style="margin-top: 20px; color: var(--white); font-weight: 700; font-size: 1.2rem;"></div>
+            <div id="lightboxCaption" style="margin-top: 30px; color: var(--white); font-weight: 800; font-size: 1.8rem; font-family: 'Bebas Neue'; letter-spacing: 2px;"></div>
         </div>
     </div>
 
-    <footer style="margin-top: 50px; padding: 40px 0; background: var(--black); text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+    <footer style="margin-top: 100px; padding: 60px 0; background: #080808; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
         <p>&copy; <span id="year"></span> MotoFixPoint. All rights reserved.</p>
     </footer>
 
@@ -235,25 +272,42 @@
         let currentProjectImages = [];
         let currentIndex = 0;
 
+        // Robust CSV Parser
+        function parseCSVLine(line) {
+            let cols = [];
+            let cur = '';
+            let inQuotes = false;
+            for (let char of line) {
+                if (char === '"') inQuotes = !inQuotes;
+                else if (char === ',' && !inQuotes) {
+                    cols.push(cur.trim());
+                    cur = '';
+                } else {
+                    cur += char;
+                }
+            }
+            cols.push(cur.trim());
+            return cols;
+        }
+
         async function fetchGallery() {
             try {
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
                 
-                // Better CSV Splitter (handles quotes)
-                const rows = data.split('\n').slice(1); 
+                const lines = data.split('\n').filter(l => l.trim().length > 0);
                 const container = document.getElementById('galleryContainer');
                 let html = '';
 
-                rows.forEach(row => {
-                    // This regex splits by commas but ignores commas inside quotes
-                    const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-                    if (!columns || columns.length < 4) return;
+                // Process records
+                for (let i = 1; i < lines.length; i++) {
+                    const columns = parseCSVLine(lines[i]);
+                    if (columns.length < 4) continue;
 
-                    const vehicleName = columns[1].replace(/"/g, '').trim();
-                    const rawImages = columns[3].replace(/"/g, '').trim(); // Get the quoted block of URLs
+                    const vehicleName = columns[1];
+                    const rawImages = columns[3];
 
-                    // Extract IDs from the entire block
+                    // Extract IDs
                     const driveIds = [];
                     const driveIdRegex = /\/d\/([a-zA-Z0-9_-]+)/g;
                     let match;
@@ -263,12 +317,12 @@
 
                     if (vehicleName && driveIds.length > 0) {
                         const coverImg = `https://lh3.googleusercontent.com/d/${driveIds[0]}`;
-                        const allImgsJson = JSON.stringify(driveIds);
+                        const allImgsJson = JSON.stringify(driveIds).replace(/'/g, "&apos;");
                         
                         html += `
                             <div class="project-card" onclick='openLightbox("${vehicleName}", ${allImgsJson})'>
                                 <div class="project-card-image">
-                                    <img src="${coverImg}" alt="${vehicleName}" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Image+Not+Public'">
+                                    <img src="${coverImg}" alt="${vehicleName}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400/111/fff?text=Photo+Private'">
                                 </div>
                                 <div class="project-card-info">
                                     <h3>${vehicleName}</h3>
@@ -277,13 +331,13 @@
                             </div>
                         `;
                     }
-                });
+                }
 
-                container.innerHTML = html || '<div style="text-align:center; padding:50px; grid-column:1/-1; color:var(--mid);">No records found. Upload via form with public links!</div>';
+                container.innerHTML = html || '<div style="text-align:center; padding:50px; grid-column:1/-1; color:var(--mid);">No records found. Please check your Drive permissions!</div>';
 
             } catch (error) {
                 console.error('Fetch Error:', error);
-                document.getElementById('galleryContainer').innerHTML = '<p style="text-align:center; grid-column:1/-1; color:var(--red);">Error loading gallery.</p>';
+                document.getElementById('galleryContainer').innerHTML = '<p style="text-align:center; grid-column:1/-1; color:var(--red);">Connection error. Please try again.</p>';
             }
         }
 
@@ -316,6 +370,14 @@
         // Close on overlay click
         document.getElementById('lightbox').addEventListener('click', function(e) {
             if (e.target === this) closeLightbox();
+        });
+
+        // Key navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'Escape') closeLightbox();
         });
 
         fetchGallery();
