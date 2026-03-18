@@ -18,20 +18,24 @@
 })();
 
 function handleEntrySubmit(e) {
-  e.preventDefault();
   const phone = document.getElementById('entryPhone').value.trim();
-  if (!phone || phone.length < 10) return;
+  if (!phone || phone.length < 10) {
+    e.preventDefault();
+    return;
+  }
 
   // Store with timestamp for 1-hr TTL
   localStorage.setItem('mfp_entered_at', Date.now().toString());
   localStorage.setItem('mfp_phone', phone);
-  // TODO: send phone to your Google Sheet / backend form URL here
-  console.log('Lead captured:', phone);
-
+  
   // Smooth dismiss
-  const modal = document.getElementById('entryModal');
-  modal.classList.add('hidden');
-  document.body.style.overflow = '';
+  setTimeout(() => {
+    const modal = document.getElementById('entryModal');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+  }, 100); 
 }
 
 // ===== ROTATING LOCATION BADGE =====

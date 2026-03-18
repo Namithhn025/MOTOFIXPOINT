@@ -276,7 +276,7 @@
             <h2 class="section-title">Complete Your <span class="accent">Booking</span></h2>
             <p class="section-sub">We'll link your selected service to your contact details.</p>
             
-            <form id="serviceBookingForm" class="booking-form" onsubmit="handleServiceBooking(event)">
+            <form id="serviceBookingForm" class="booking-form" target="hidden_service_iframe" onsubmit="handleServiceBooking(event)" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdGM5QID2iG-2e--9AArMdLJtzNX_5x-gcyJqUkf7_vkStg-g/formResponse">
                 <div class="contact-field">
                     <label>Selected Service</label>
                     <input type="text" id="selectedServiceName" readonly value="General Service">
@@ -285,36 +285,37 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="contact-field">
                         <label>Your Name</label>
-                        <input type="text" id="bookName" placeholder="Full Name" required>
+                        <input type="text" name="entry.2097189956" id="bookName" placeholder="Full Name" required>
                     </div>
                     <div class="contact-field">
                         <label>Phone Number</label>
                         <div class="phone-input-wrapper" style="margin-top:0;">
                             <span class="prefix">+91</span>
-                            <input type="tel" id="bookPhone" placeholder="Mobile" required pattern="[0-9]{10}">
+                            <input type="tel" name="entry.1036985252" id="bookPhone" placeholder="Mobile" required pattern="[0-9]{10}">
                         </div>
                     </div>
                 </div>
 
                 <div class="contact-field">
                     <label>Email ID (Optional)</label>
-                    <input type="email" id="bookEmail" placeholder="your@email.com">
+                    <input type="email" name="entry.751925360" id="bookEmail" placeholder="your@email.com">
                 </div>
 
                 <div class="contact-field">
                     <label>Doorstep Location (Street / Landmark)</label>
-                    <input type="text" id="bookLocation" placeholder="Electronic City Phase 1, Near... " required>
+                    <input type="text" name="entry.732674136" id="bookLocation" placeholder="Address... " required>
                 </div>
 
                 <div class="contact-field">
                     <label>Additional Notes / Fault Summary (Optional)</label>
-                    <textarea id="bookSummary" rows="3" placeholder="Explain the problem..."></textarea>
+                    <textarea name="entry.757387567" id="bookSummary" rows="3" placeholder="Explain the problem..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-primary btn-full" style="margin-top: 20px;">Confirm & Book at Doorstep</button>
                 <p id="bookingSuccess" style="margin-top: 15px; color: #22c55e; text-align: center; display: none;">✅ Booking received! We will call you to confirm your slot.</p>
             </form>
         </div>
+        <iframe name="hidden_service_iframe" id="hidden_service_iframe" style="display:none;"></iframe>
 
         <script>
             function selectService(name) {
@@ -324,9 +325,18 @@
             }
 
             function handleServiceBooking(e) {
-                e.preventDefault();
+                // Prepend selected service to summary
+                const service = document.getElementById('selectedServiceName').value;
+                const summary = document.getElementById('bookSummary');
+                summary.value = `[SERVICE: ${service}] ` + summary.value;
+                
                 document.getElementById('bookingSuccess').style.display = 'block';
-                setTimeout(() => { document.getElementById('bookingSuccess').style.display = 'none'; }, 5000);
+                setTimeout(() => { 
+                    document.getElementById('bookingSuccess').style.display = 'none';
+                    document.getElementById('serviceBookingForm').reset();
+                    document.getElementById('bookingSection').style.display = 'none';
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                }, 4000);
             }
         </script>
     </main>
