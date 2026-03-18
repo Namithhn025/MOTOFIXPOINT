@@ -15,46 +15,108 @@
             padding-top: 150px;
             padding-bottom: 100px;
         }
+        
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--mid);
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background: var(--red);
+            border-color: var(--red);
+            color: var(--white);
+            box-shadow: 0 0 20px rgba(250, 5, 5, 0.3);
+        }
+
+        .vehicle-section {
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .vehicle-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--red);
+            padding-left: 20px;
+        }
+
+        .vehicle-info h3 {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin: 0;
+        }
+
+        .vehicle-info .tag {
+            background: rgba(250, 5, 5, 0.1);
+            color: var(--red);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
         .gallery-grid-full {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
+
         .gallery-item {
             position: relative;
-            border-radius: var(--radius);
+            border-radius: 12px;
             overflow: hidden;
-            aspect-ratio: 4/3;
+            aspect-ratio: 16/10;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: var(--transition);
         }
+
         .gallery-item:hover {
             transform: scale(1.02);
             border-color: var(--red);
+            z-index: 2;
         }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
         .gallery-item-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(13, 13, 13, 0.8), transparent);
+            background: linear-gradient(to top, rgba(13, 13, 13, 0.9), transparent);
             display: flex;
             align-items: flex-end;
-            padding: 20px;
+            padding: 15px;
             opacity: 0;
             transition: 0.4s;
         }
+
         .gallery-item:hover .gallery-item-overlay {
             opacity: 1;
         }
-        .gallery-item-overlay span {
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1.1rem;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -79,44 +141,45 @@
     <main class="container gallery-page-container">
         <div class="section-header" style="text-align: center; margin-bottom: 60px;">
             <span class="section-tag">Transformation Gallery</span>
-            <h2 class="section-title">From Our <span class="accent">Workshop Floors</span></h2>
-            <p class="section-sub">Real work on premium cars and performance bikes across Electronic City and Bangalore.</p>
+            <h2 class="section-title">Workshop <span class="accent">Masterpieces</span></h2>
+            <p class="section-sub">Witness the journey from repair to perfection. Sorted by our latest high-impact projects.</p>
         </div>
 
-        <div class="gallery-grid-full">
-            <div class="gallery-item" data-title="Car Engine Diagnostics">
-                <img src="assets/gallery/g1.jpg" alt="Car Maintenance" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Car+Service'">
-                <div class="gallery-item-overlay"><span>Car Engine Diagnostics</span></div>
+        <div class="gallery-filter">
+            <button class="filter-btn active" onclick="filterGallery('all')">View All</button>
+            <button class="filter-btn" onclick="filterGallery('bike')">Bikes</button>
+            <button class="filter-btn" onclick="filterGallery('car')">Cars</button>
+            <button class="filter-btn" onclick="filterGallery('ev')">Electric (EV)</button>
+        </div>
+
+        <div id="galleryContainer">
+            <!-- Sample Record 1: Bike -->
+            <div class="vehicle-section" data-type="bike">
+                <div class="vehicle-info">
+                    <h3>TVS Apache RTR 200 • Full Transformation</h3>
+                    <span class="tag">Performance Bike</span>
+                </div>
+                <div class="gallery-grid-full">
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Process+1" alt="Bike 1"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Process+2" alt="Bike 2"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Final+Result" alt="Bike 3"></div>
+                </div>
             </div>
-            <div class="gallery-item" data-title="Performance Bike Tuning">
-                <img src="assets/gallery/g2.jpg" alt="Bike Tuning" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Bike+Tuning'">
-                <div class="gallery-item-overlay"><span>Performance Bike Tuning</span></div>
+
+            <!-- Sample Record 2: Car -->
+            <div class="vehicle-section" data-type="car">
+                <div class="vehicle-info">
+                    <h3>Honda City • Deep Engine Clean</h3>
+                    <span class="tag">Premium Car</span>
+                </div>
+                <div class="gallery-grid-full">
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Engine+Before" alt="Car 1"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=During+Service" alt="Car 2"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Engine+After" alt="Car 3"></div>
+                </div>
             </div>
-            <div class="gallery-item" data-title="High-Pressure Wash">
-                <img src="assets/gallery/g3.jpg" alt="Car Detail" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Car+Detail'">
-                <div class="gallery-item-overlay"><span>High-Pressure Detailing</span></div>
-            </div>
-            <div class="gallery-item" data-title="Full Service Overhaul">
-                <img src="assets/gallery/g4.jpg" alt="Workshop Operations" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Bike+Service'">
-                <div class="gallery-item-overlay"><span>Full Service Overhaul</span></div>
-            </div>
-            <div class="gallery-item" data-title="AC Repair & Gas Recharge">
-                <img src="assets/gallery/g5.jpg" alt="Car AC service" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=AC+Service'">
-                <div class="gallery-item-overlay"><span>AC Repair & Gas Recharge</span></div>
-            </div>
-            <div class="gallery-item" data-title="Expert Denting & Painting">
-                <img src="assets/gallery/g6.jpg" alt="Denting Paint" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Paint+Job'">
-                <div class="gallery-item-overlay"><span>Expert Denting & Painting</span></div>
-            </div>
-             <!-- Repeat or add more as needed -->
-             <div class="gallery-item" data-title="Custom Bike Detailing">
-                <img src="assets/gallery/g1.jpg" alt="Car Maintenance" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Custom+Work'">
-                <div class="gallery-item-overlay"><span>Custom Bike Detailing</span></div>
-            </div>
-            <div class="gallery-item" data-title="Premium Oil Change">
-                <img src="assets/gallery/g2.jpg" alt="Bike Tuning" onerror="this.src='https://via.placeholder.com/600x400/1a1a1a/fafafa/?text=Oil+Change'">
-                <div class="gallery-item-overlay"><span>Premium Oil Change</span></div>
-            </div>
+            
+            <!-- More records will follow based on Form 3 submissions -->
         </div>
     </main>
 
@@ -125,7 +188,25 @@
     </footer>
 
     <script>
-         document.getElementById('year').textContent = new Date().getFullYear();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function filterGallery(type) {
+            // Update buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter sections
+            const sections = document.querySelectorAll('.vehicle-section');
+            sections.forEach(section => {
+                if (type === 'all' || section.getAttribute('data-type') === type) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
     </script>
+</body>
+</html>
 </body>
 </html>
