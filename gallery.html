@@ -291,23 +291,30 @@
         }
 
         async function fetchGallery() {
+            const container = document.getElementById('galleryContainer');
+            
+            // 1. Instant Load from Cache (if exists) 
+            const cachedData = localStorage.getItem('motofix_gallery_cache');
+            if (cachedData) {
+                renderHTML(JSON.parse(cachedData));
+            }
+
             try {
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
                 
                 const lines = data.split('\n').filter(l => l.trim().length > 0);
-                const container = document.getElementById('galleryContainer');
-                let html = '';
+                const projects = [];
 
-                // Process records
+                // Parse records
                 for (let i = 1; i < lines.length; i++) {
                     const columns = parseCSVLine(lines[i]);
                     if (columns.length < 4) continue;
 
                     const vehicleName = columns[1];
+                    const priority = parseInt(columns[2]) || 0;
                     const rawImages = columns[3];
 
-                    // Extract IDs
                     const driveIds = [];
                     const driveIdRegex = /\/d\/([a-zA-Z0-9_-]+)/g;
                     let match;
@@ -316,28 +323,52 @@
                     }
 
                     if (vehicleName && driveIds.length > 0) {
-                        const coverImg = `https://lh3.googleusercontent.com/d/${driveIds[0]}`;
-                        const allImgsJson = JSON.stringify(driveIds).replace(/'/g, "&apos;");
-                        
-                        html += `
-                            <div class="project-card" onclick='openLightbox("${vehicleName}", ${allImgsJson})'>
-                                <div class="project-card-image">
-                                    <img src="${coverImg}" alt="${vehicleName}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400/111/fff?text=Photo+Private'">
-                                </div>
-                                <div class="project-card-info">
-                                    <h3>${vehicleName}</h3>
-                                    <span class="project-card-count">${driveIds.length} Photos</span>
-                                </div>
-                            </div>
-                        `;
+                        projects.push({ name: vehicleName, priority, ids: driveIds });
                     }
                 }
 
-                container.innerHTML = html || '<div style="text-align:center; padding:50px; grid-column:1/-1; color:var(--mid);">No records found. Please check your Drive permissions!</div>';
+                // 2. Sort by Priority (Highest first)
+                projects.sort((a, b) => b.priority - a.priority);
+
+                // 3. Cache the new data
+                localStorage.setItem('motofix_gallery_cache', JSON.stringify(projects));
+
+                // 4. Render to UI
+                renderHTML(projects);
 
             } catch (error) {
                 console.error('Fetch Error:', error);
-                document.getElementById('galleryContainer').innerHTML = '<p style="text-align:center; grid-column:1/-1; color:var(--red);">Connection error. Please try again.</p>';
+                if (!cachedData) {
+                    container.innerHTML = '<p style="text-align:center; grid-column:1/-1; color:var(--red);">Connection error. Please try again.</p>';
+                }
+            }
+        }
+
+        function renderHTML(projects) {
+            const container = document.getElementById('galleryContainer');
+            let html = '';
+
+            projects.forEach(project => {
+                const coverImg = `https://lh3.googleusercontent.com/d/${project.ids[0]}`;
+                const allImgsJson = JSON.stringify(project.ids).replace(/'/g, "&apos;");
+                
+                html += `
+                    <div class="project-card" onclick='openLightbox("${project.name}", ${allImgsJson})'>
+                        <div class="project-card-image">
+                            <img src="${coverImg}" alt="${project.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400/111/fff?text=Photo+Private'">
+                        </div>
+                        <div class="project-card-info">
+                            <h3>${project.name}</h3>
+                            <span class="project-card-count">${project.ids.length} Photos</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (html) {
+                container.innerHTML = html;
+            } else if (!projects.length) {
+                container.innerHTML = '<div style="text-align:center; padding:50px; grid-column:1/-1; color:var(--mid);">No records found. High quality projects coming soon!</div>';
             }
         }
 
