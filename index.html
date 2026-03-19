@@ -424,58 +424,136 @@
             <div class="section-header">
                 <span class="section-tag">Our Work</span>
                 <h2 class="section-title">From Our <span class="accent">Workshop</span></h2>
-                <p class="section-sub">Real cars and bikes, real repairs. Photos from our Electronic City workshop —
-                    updated regularly.</p>
+                <p class="section-sub">Witness the journey from repair to perfection. Real transformations from our Electronic City workshop — updated live.</p>
             </div>
-            <div class="gallery-grid" id="galleryGrid">
-                <div class="gallery-item gallery-item--large" id="gal1">
-                    <img src="assets/gallery/g1.jpg" alt="Car engine repair at MotoFixPoint Electronic City"
-                        onerror="this.parentElement.classList.add('gal-placeholder'); this.style.display='none'" />
-                    <div class="gallery-overlay"><span>Car Engine Repair</span></div>
-                    <div class="gal-placeholder-content"><span class="gal-ph-icon">⚙️</span><span>Car Engine
-                            Repair</span></div>
-                </div>
-                <div class="gallery-item" id="gal2">
-                    <img src="assets/gallery/g2.jpg" alt="Bike tyre replacement Electronic City"
-                        onerror="this.parentElement.classList.add('gal-placeholder'); this.style.display='none'" />
-                    <div class="gallery-overlay"><span>Bike Tyre Replacement</span></div>
-                    <div class="gal-placeholder-content"><span class="gal-ph-icon">🛞</span><span>Tyre
-                            Replacement</span></div>
-                </div>
-                <div class="gallery-item" id="gal3">
-                    <img src="assets/gallery/g3.jpg" alt="Car wash and detailing Electronic City Bengaluru"
-                        onerror="this.parentElement.classList.add('gal-placeholder'); this.style.display='none'" />
-                    <div class="gallery-overlay"><span>Car Wash &amp; Detailing</span></div>
-                    <div class="gal-placeholder-content"><span class="gal-ph-icon">🚿</span><span>Car Wash &amp;
-                            Detailing</span></div>
-                </div>
-                <div class="gallery-item" id="gal4">
-                    <img src="assets/gallery/g4.jpg" alt="Bike full service at MotoFixPoint"
-                        onerror="this.parentElement.classList.add('gal-placeholder'); this.style.display='none'" />
-                    <div class="gallery-overlay"><span>Complete Bike Service</span></div>
-                    <div class="gal-placeholder-content"><span class="gal-ph-icon">🏍️</span><span>Complete Bike
-                            Service</span></div>
-                </div>
-                <div class="gallery-item" id="gal5">
-                    <img src="assets/gallery/g5.jpg" alt="Car electrical and AC repair Electronic City"
-                        onerror="this.parentElement.classList.add('gal-placeholder'); this.style.display='none'" />
-                    <div class="gallery-overlay"><span>Car Electrical &amp; AC Repair</span></div>
-                    <div class="gal-placeholder-content"><span class="gal-ph-icon">⚡</span><span>Electrical &amp; AC
-                            Repair</span></div>
-                </div>
-                <div class="gallery-item" id="gal6">
-                    <img src="assets/gallery/g6.jpg" alt="Denting and painting for cars and bikes"
-                        onerror="this.parentElement.classList.add('gal-placeholder'); this.style.display='none'" />
-                    <div class="gallery-overlay"><span>Denting &amp; Painting</span></div>
-                    <div class="gal-placeholder-content"><span class="gal-ph-icon">🎨</span><span>Denting &amp;
-                            Painting</span></div>
-                </div>
+            
+            <div class="gallery-grid-dynamic" id="homeGalleryContainer">
+                <div class="skeleton-home"></div>
+                <div class="skeleton-home"></div>
+                <div class="skeleton-home"></div>
             </div>
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="gallery.html" class="btn-secondary">View Complete Workshop Gallery</a>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="gallery.html" class="btn-secondary">View Complete Project Gallery</a>
             </div>
         </div>
     </section>
+
+    <!-- Project Lightbox for Home -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-content">
+            <div class="lightbox-image-container">
+                <img id="lightboxImg" src="" alt="Gallery Image">
+            </div>
+            <button class="lightbox-nav" style="left: -100px" onclick="changeImage(-1)">&#10094;</button>
+            <button class="lightbox-nav" style="right: -100px" onclick="changeImage(1)">&#10095;</button>
+            <div id="lightboxCaption" style="margin-top: 30px; color: var(--white); font-weight: 800; font-size: 1.8rem; font-family: 'Bebas Neue'; letter-spacing: 2px; text-transform: uppercase;"></div>
+        </div>
+    </div>
+
+    <script>
+        const GALLERY_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxSVACJI48Iec-Bnx4bvscsjkKLHoHTPfKsBuotvpg8I0jPWBTDuVKLQxpjHHXcOSy1cdpBCyp9ary/pub?output=csv';
+        let currentProjectImages = [];
+        let currentIndex = 0;
+
+        function parseCSVLine(line) {
+            let cols = [];
+            let cur = '';
+            let inQuotes = false;
+            for (let char of line) {
+                if (char === '"') inQuotes = !inQuotes;
+                else if (char === ',' && !inQuotes) {
+                    cols.push(cur.trim());
+                    cur = '';
+                } else {
+                    cur += char;
+                }
+            }
+            cols.push(cur.trim());
+            return cols;
+        }
+
+        async function fetchHomeGallery() {
+            const container = document.getElementById('homeGalleryContainer');
+            const cached = localStorage.getItem('motofix_gallery_cache');
+            if (cached) renderHome(JSON.parse(cached).slice(0, 3));
+
+            try {
+                const response = await fetch(GALLERY_CSV);
+                const data = await response.text();
+                const lines = data.split('\n').filter(l => l.trim().length > 0);
+                const projects = [];
+
+                for (let i = 1; i < lines.length; i++) {
+                    const columns = parseCSVLine(lines[i]);
+                    if (columns.length < 4) continue;
+                    const driveIds = [];
+                    const driveIdRegex = /\/d\/([a-zA-Z0-9_-]+)/g;
+                    let match;
+                    while ((match = driveIdRegex.exec(columns[3])) !== null) driveIds.push(match[1]);
+                    if (columns[1] && driveIds.length > 0) {
+                        projects.push({ name: columns[1], priority: parseInt(columns[2]) || 0, ids: driveIds });
+                    }
+                }
+                projects.sort((a, b) => a.priority - b.priority);
+                localStorage.setItem('motofix_gallery_cache', JSON.stringify(projects));
+                renderHome(projects.slice(0, 3)); 
+            } catch (err) { console.error(err); }
+        }
+
+        function renderHome(projects) {
+            const container = document.getElementById('homeGalleryContainer');
+            let html = '';
+            projects.forEach(p => {
+                const allImgsJson = JSON.stringify(p.ids).replace(/'/g, "&apos;");
+                html += `
+                    <div class="project-card" onclick='openLightbox("${p.name}", ${allImgsJson})'>
+                        <div class="project-card-image">
+                            <img src="https://lh3.googleusercontent.com/d/${p.ids[0]}" alt="${p.name}" loading="lazy">
+                        </div>
+                        <div class="project-card-info">
+                            <h3>${p.name}</h3>
+                            <span class="project-card-count">${p.ids.length} Photos</span>
+                        </div>
+                    </div>
+                `;
+            });
+            if (html) container.innerHTML = html;
+        }
+
+        function openLightbox(name, ids) {
+            currentProjectImages = ids;
+            currentIndex = 0;
+            document.getElementById('lightboxCaption').textContent = name;
+            updateImg();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateImg() {
+            document.getElementById('lightboxImg').src = `https://lh3.googleusercontent.com/d/${currentProjectImages[currentIndex]}`;
+        }
+
+        function changeImage(dir) {
+            currentIndex = (currentIndex + dir + currentProjectImages.length) % currentProjectImages.length;
+            updateImg();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        fetchHomeGallery();
+    </script>
 
     <!-- ===== BRANDS ===== -->
     <section class="section brands-section" aria-label="Vehicle brands we service">
