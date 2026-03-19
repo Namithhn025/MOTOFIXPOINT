@@ -17,6 +17,16 @@
   }
 })();
 
+function closeEntryModal() {
+  // Store TTL so modal won't show for 1 hour even if skipped
+  localStorage.setItem('mfp_entered_at', Date.now().toString());
+  const modal = document.getElementById('entryModal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+}
+
 function handleEntrySubmit(e) {
   const phone = document.getElementById('entryPhone').value.trim();
   if (!phone || phone.length < 10) {

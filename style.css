@@ -1796,6 +1796,43 @@ ul {
     margin-bottom: 24px;
     line-height: 1.5;
 }
+.entry-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--mid);
+    font-size: 1.1rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 1;
+}
+.entry-modal-close:hover {
+    background: rgba(250, 5, 5, 0.15);
+    border-color: rgba(250, 5, 5, 0.4);
+    color: var(--white);
+}
+.entry-skip-text {
+    font-size: 0.8rem !important;
+    margin-top: 12px !important;
+    margin-bottom: 0 !important;
+    color: rgba(255,255,255,0.3) !important;
+}
+.entry-skip-text a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: underline;
+    transition: var(--transition);
+}
+.entry-skip-text a:hover {
+    color: var(--red-light);
+}
 .phone-input-wrapper {
     display: flex;
     align-items: center;

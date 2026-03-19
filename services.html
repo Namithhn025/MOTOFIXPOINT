@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services | MotoFixPoint — Premium Car & Bike Repair</title>
+    <title>Services | MotoFixPoint — Car &amp; Bike Repair Electronic City Bengaluru</title>
     <meta name="description"
-        content="Explore doorstep car and bike services by MotoFixPoint. Price-transparent, expert mechanics for all brands including Electric Vehicles." />
+        content="Explore all car and bike repair services by MotoFixPoint. Engine service, tyre change, car wash, battery replacement, denting &amp; painting. Transparent pricing. Electronic City, Bengaluru." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,197 +14,575 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* Specific styles for the Services Page */
-        .service-selection-box {
-            background: rgba(18, 18, 18, 0.7);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(250, 5, 5, 0.3);
-            border-radius: var(--radius-lg);
-            padding: 50px;
-            margin-top: -80px;
+        /* =============================================
+           SERVICES PAGE — PREMIUM REDESIGN
+           Inspired by ridenrepair.com layout
+        ============================================= */
+
+        .services-page-hero {
+            padding: 130px 0 60px;
+            background: var(--black);
+            text-align: center;
             position: relative;
-            z-index: 10;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(250, 5, 5, 0.1);
+            overflow: hidden;
         }
 
-        .toggle-group {
-            display: inline-flex;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 5px;
-            border-radius: 50px;
-            gap: 5px;
-            margin-bottom: 35px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .selector-btn {
-            background: transparent;
-            border: none;
-            color: var(--mid);
-            padding: 10px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-
-        .selector-btn.active {
-            background: linear-gradient(135deg, var(--red) 0%, #C70000 100%);
-            color: var(--white);
-            box-shadow: 0 5px 15px rgba(250, 5, 5, 0.3);
-        }
-
-        .dropdown-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .select-wrapper {
-            position: relative;
-        }
-
-        .select-wrapper select {
-            width: 100%;
-            background: var(--dark3);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            color: var(--white);
-            padding: 18px 20px;
-            border-radius: 12px;
-            outline: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            appearance: none;
-            transition: var(--transition);
-        }
-
-        .select-wrapper::after {
-            content: '▼';
+        .services-page-hero::before {
+            content: '';
             position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--red);
-            font-size: 0.8rem;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(250, 5, 5, 0.12) 0%, transparent 70%);
             pointer-events: none;
         }
 
-        .select-wrapper select:focus {
-            border-color: var(--red);
-            background: var(--dark);
-            box-shadow: 0 0 20px rgba(250, 5, 5, 0.15);
+        .services-page-hero .hero-slash {
+            font-family: var(--font-head);
+            font-size: 4.5rem;
+            color: var(--white);
+            letter-spacing: 6px;
+            line-height: 1;
+            margin-bottom: 16px;
         }
 
-        .service-list-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
+        .services-page-hero .hero-slash .slash {
+            color: var(--red);
         }
 
-        .service-item-card {
-            background: var(--dark3);
-            border-radius: var(--radius);
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .services-page-hero p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ── FILTER BAR ── */
+        .filter-bar {
+            background: var(--dark2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 30px 0;
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+        }
+
+        .filter-bar .container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--red);
+            white-space: nowrap;
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-pill {
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 9px 22px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: var(--font-body);
             transition: var(--transition);
+        }
+
+        .filter-pill:hover {
+            border-color: rgba(250, 5, 5, 0.5);
+            color: var(--white);
+        }
+
+        .filter-pill.active {
+            background: linear-gradient(135deg, var(--red), #C70000);
+            border-color: transparent;
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(250, 5, 5, 0.35);
+        }
+
+        /* ── SERVICE CARDS SECTION ── */
+        .services-cards-section {
+            padding: 70px 0 100px;
+            background: var(--black);
+        }
+
+        .services-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        /* ── PREMIUM SERVICE CARD (White, like ridenrepair) ── */
+        .svc-card {
+            background: #ffffff;
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+
+        .svc-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(250, 5, 5, 0.3);
+        }
+
+        .svc-card-img {
+            position: relative;
+            background: #f8f8f8;
+            overflow: hidden;
+        }
+
+        .svc-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 260px;
+            transition: transform 0.5s ease;
+        }
+
+        .svc-card:hover .svc-card-img img {
+            transform: scale(1.05);
+        }
+
+        .svc-card-type-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--red);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 12px;
+            border-radius: 999px;
+        }
+
+        .svc-card-body {
+            padding: 32px 36px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .service-item-card:hover {
-            border-color: var(--red);
-            transform: translateY(-5px);
-        }
+        .svc-card-top {}
 
-        .price-tag {
-            font-size: 1.5rem;
-            font-family: var(--font-head);
-            color: var(--red);
-            margin: 15px 0;
-        }
-
-        .price-tag span {
-            text-decoration: line-through;
-            color: var(--mid);
-            font-size: 0.9rem;
-            margin-left: 10px;
-        }
-
-        .booking-placeholder {
-            margin-top: 80px;
-            padding: 60px;
-            background: linear-gradient(135deg, var(--dark2) 0%, var(--dark) 100%);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(250, 5, 5, 0.2);
-            box-shadow: var(--shadow-red);
-        }
-
-        .booking-form {
-            max-width: 600px;
-            margin: 40px auto;
-            text-align: left;
-            background: var(--dark3);
-            padding: 40px;
-            border-radius: var(--radius);
-            border: 1px solid var(--red);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .contact-field {
-            margin-bottom: 24px;
-        }
-
-        .contact-field label {
-            display: block;
-            color: var(--white);
-            font-size: 0.85rem;
-            font-weight: 700;
+        .svc-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.8;
         }
 
-        .contact-field input,
-        .contact-field textarea {
-            width: 100%;
-            background: rgba(13, 13, 13, 0.6) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--white) !important;
-            padding: 14px 18px;
+        .svc-card-category {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+        }
+
+        .svc-card-time {
+            background: #f0f0f0;
+            color: #555;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 999px;
+        }
+
+        .svc-card-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 6px;
+            line-height: 1.25;
+        }
+
+        .svc-card-desc {
+            font-size: 0.875rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .svc-checklist {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            margin-bottom: 24px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .svc-checklist li {
+            font-size: 0.82rem;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 500;
+        }
+
+        .svc-checklist li::before {
+            content: '✓';
+            color: #16a34a;
+            font-weight: 900;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .svc-card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .svc-price-block {}
+
+        .svc-price-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .svc-price {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: #111;
+            line-height: 1;
+        }
+
+        .svc-price span.old-price {
             font-size: 1rem;
-            outline: none;
+            font-weight: 500;
+            color: #aaa;
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+
+        .svc-book-btn {
+            background: linear-gradient(135deg, var(--red), #C70000);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(250, 5, 5, 0.35);
+            white-space: nowrap;
+        }
+
+        .svc-book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(250, 5, 5, 0.5);
+        }
+
+        /* ── BOOKING FORM MODAL ── */
+        .booking-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .booking-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .booking-modal {
+            background: #111;
+            border-radius: 24px;
+            border: 1px solid rgba(250, 5, 5, 0.25);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            max-width: 560px;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .booking-modal-overlay.active .booking-modal {
+            transform: translateY(0);
+        }
+
+        .booking-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: var(--transition);
         }
 
-        .contact-field input:focus,
-        .contact-field textarea:focus {
-            border-color: var(--red);
-            box-shadow: 0 0 15px rgba(250, 5, 5, 0.2);
-            background: rgba(13, 13, 13, 0.9) !important;
+        .booking-modal-close:hover {
+            background: rgba(250, 5, 5, 0.2);
+            border-color: rgba(250, 5, 5, 0.5);
+            color: #fff;
         }
 
-        .phone-input-wrapper {
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
+        .booking-modal h2 {
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 4px;
         }
 
-        #selectedServiceName {
+        .booking-modal .selected-service-tag {
+            display: inline-block;
+            background: rgba(250, 5, 5, 0.12);
+            border: 1px solid rgba(250, 5, 5, 0.3);
+            color: var(--red-light);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 4px 14px;
+            border-radius: 999px;
+            margin-bottom: 28px;
+        }
+
+        .booking-field {
+            margin-bottom: 20px;
+        }
+
+        .booking-field label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 8px;
+        }
+
+        .booking-field input,
+        .booking-field select,
+        .booking-field textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--white);
+            padding: 14px 18px;
+            font-size: 0.95rem;
+            font-family: var(--font-body);
+            outline: none;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+
+        .booking-field input::placeholder,
+        .booking-field textarea::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .booking-field input:focus,
+        .booking-field select:focus,
+        .booking-field textarea:focus {
             border-color: var(--red);
-            color: var(--red) !important;
-            font-family: var(--font-head);
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-            cursor: default;
-            background: rgba(250, 5, 5, 0.05) !important;
+            background: rgba(250, 5, 5, 0.04);
+            box-shadow: 0 0 0 3px rgba(250, 5, 5, 0.1);
+        }
+
+        .booking-field select option {
+            background: #1a1a1a;
+        }
+
+        .booking-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .booking-modal-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--red), #C70000);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(250, 5, 5, 0.35);
+            margin-top: 8px;
+        }
+
+        .booking-modal-submit:hover {
+            box-shadow: 0 12px 40px rgba(250, 5, 5, 0.55);
+        }
+
+        .booking-success-msg {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(22, 163, 74, 0.1);
+            border: 1px solid rgba(22, 163, 74, 0.3);
+            border-radius: 12px;
+            color: #4ade80;
+            font-weight: 700;
+            margin-top: 16px;
+            font-size: 0.95rem;
+        }
+
+        /* ── HIDDEN CARDS ── */
+        .svc-card[data-hidden="true"] {
+            display: none;
+        }
+
+        /* ── WHY CHOOSE US STRIP ── */
+        .why-strip {
+            background: linear-gradient(135deg, #0d0d0d, #1a0000);
+            border-top: 1px solid rgba(250, 5, 5, 0.15);
+            border-bottom: 1px solid rgba(250, 5, 5, 0.15);
+            padding: 60px 0;
+        }
+
+        .why-strip-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .why-strip-item {
+            text-align: center;
+        }
+
+        .why-strip-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .why-strip-title {
+            font-weight: 800;
+            color: var(--white);
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .why-strip-desc {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.6;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .svc-card {
+                grid-template-columns: 1fr;
+            }
+
+            .svc-card-img img {
+                min-height: 220px;
+            }
+
+            .svc-checklist {
+                grid-template-columns: 1fr;
+            }
+
+            .why-strip-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .services-page-hero .hero-slash {
+                font-size: 2.8rem;
+            }
+
+            .svc-card-body {
+                padding: 24px 20px;
+            }
+
+            .svc-card-title {
+                font-size: 1.25rem;
+            }
+
+            .booking-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-modal {
+                padding: 28px 20px;
+            }
+
+            .svc-card-bottom {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .svc-book-btn {
+                text-align: center;
+            }
+
+            .why-strip-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .why-strip-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -214,279 +592,503 @@
     <nav class="navbar scrolled" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo" aria-label="MotoFixPoint Home">
-                <img src="assets/logo.png" alt="MotoFixPoint Logo" class="logo-img" />
+                <img src="assets/logo.png" alt="MotoFixPoint Logo" class="logo-img"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+                <span class="logo-fallback">
+                    <span class="logo-moto">MOTO</span><span class="logo-fix">FIX</span><span
+                        class="logo-point">POINT</span>
+                </span>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html" class="nav-active">Services</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <a href="tel:+919999999999" class="nav-cta">📞 Call Now</a>
+            <a href="tel:+919999999999" class="nav-cta" id="navCallBtn">📞 Call Now</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <header class="page-hero" style="padding-top: 150px; padding-bottom: 100px; text-align: center;">
+    <!-- ===== PAGE HERO ===== -->
+    <header class="services-page-hero">
         <div class="container">
-            <h1 class="hero-title" style="font-size: 4rem;">Expert <span class="hero-title-accent">Services</span></h1>
-            <p class="hero-subtitle">Select your vehicle to see tailor-made maintenance packages.</p>
+            <div class="hero-slash"><span class="slash">// </span>SERVICES<span class="slash"> //</span></div>
+            <p>Expert car &amp; bike repairs with transparent pricing. All brands welcome in Electronic City, Bengaluru.</p>
         </div>
     </header>
 
-    <main class="container">
-        <div class="service-selection-box" style="text-align: center;">
-            <div style="margin-bottom: 40px;">
-                <span
-                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--red); font-weight: 800; display: block; margin-bottom: 15px;">Step
-                    1: Select Your Ride</span>
-                <div class="toggle-group">
-                    <button class="selector-btn active" onclick="setVehicle('bike')">Bike / Scooter</button>
-                    <button class="selector-btn" onclick="setVehicle('car')">Premium Car</button>
-                </div>
-            </div>
-
-            <div id="fuelToggleContainer" style="margin-bottom: 40px;">
-                <span
-                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--red); font-weight: 800; display: block; margin-bottom: 15px;">Step
-                    2: Fuel Type</span>
-                <div id="fuelToggle" class="toggle-group">
-                    <button class="selector-btn active" onclick="setFuel('petrol')">Petrol Engine</button>
-                    <button class="selector-btn" onclick="setFuel('electric')">Electric (EV)</button>
-                </div>
-            </div>
-
-            <div style="margin-bottom: 20px;">
-                <span
-                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--red); font-weight: 800; display: block; margin-bottom: 25px;">Step
-                    3: Brand & Model</span>
-                <div class="dropdown-grid">
-                    <div class="select-wrapper">
-                        <select id="brandSelect" onchange="updateModels()">
-                            <option value="">Select Brand</option>
-                        </select>
-                    </div>
-                    <div class="select-wrapper">
-                        <select id="modelSelect">
-                            <option value="">Select Model</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-primary btn-full" onclick="showPricing()"
-                style="font-size: 1.1rem; padding: 20px; box-shadow: 0 10px 30px rgba(250,5,5,0.3);">View Available
-                Packages</button>
-        </div>
-
-        <div id="serviceList" class="service-list-container">
-            <!-- Populated after selection -->
-            <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--mid);">
-                Choose brand and model to see accurate pricing.
+    <!-- ===== FILTER BAR ===== -->
+    <div class="filter-bar">
+        <div class="container">
+            <span class="filter-label">Filter by:</span>
+            <div class="filter-pills" role="group" aria-label="Filter services by type">
+                <button class="filter-pill active" id="pill-all" onclick="filterCards('all')">All Services</button>
+                <button class="filter-pill" id="pill-car" onclick="filterCards('car')">🚗 Car</button>
+                <button class="filter-pill" id="pill-bike" onclick="filterCards('bike')">🏍️ Bike</button>
+                <button class="filter-pill" id="pill-both" onclick="filterCards('both')">🔧 Car &amp; Bike</button>
             </div>
         </div>
+    </div>
 
-        <div class="booking-placeholder" id="bookingSection" style="display: none;">
-            <h2 class="section-title">Complete Your <span class="accent">Booking</span></h2>
-            <p class="section-sub">We'll link your selected service to your contact details.</p>
+    <!-- ===== SERVICE CARDS ===== -->
+    <section class="services-cards-section" aria-label="All services">
+        <div class="container">
+            <div class="services-cards-grid" id="servicesCardsGrid">
 
-            <form id="serviceBookingForm" class="booking-form" target="hidden_service_iframe"
-                onsubmit="handleServiceBooking(event)"
-                action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdGM5QID2iG-2e--9AArMdLJtzNX_5x-gcyJqUkf7_vkStg-g/formResponse">
-                <div class="contact-field">
-                    <label>Selected Service</label>
-                    <input type="text" name="entry.773745263" id="selectedServiceName" readonly value="General Service">
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="contact-field">
-                        <label>Your Name</label>
-                        <input type="text" name="entry.1425802658" id="bookName" placeholder="Full Name" required>
+                <!-- 1. Bike General Service -->
+                <div class="svc-card" data-type="bike" id="card-bike-service">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Two-Wheeler</span>
+                        <img src="assets/service_bike_general.png" alt="Bike General Service at MotoFixPoint" loading="lazy" />
                     </div>
-                    <div class="contact-field">
-                        <label>Phone Number</label>
-                        <div class="phone-input-wrapper" style="margin-top:0;">
-                            <span class="prefix">+91</span>
-                            <input type="tel" name="entry.1301873050" id="bookPhone" placeholder="Mobile" required pattern="[0-9]{10}">
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🏍️ Bike Service</span>
+                                <span class="svc-card-time">⏱ 1–2 HRS</span>
+                            </div>
+                            <h2 class="svc-card-title">General Bike Service (with Oil)</h2>
+                            <p class="svc-card-desc">Complete 12-point checkup keeping your ride smooth, safe and optimised. Includes engine oil change, chain lubrication, brake checks and a full wash.</p>
+                            <ul class="svc-checklist">
+                                <li>Engine Oil Change</li>
+                                <li>Chain Cleaning &amp; Lube</li>
+                                <li>Air Filter Check</li>
+                                <li>Brake Adjustment</li>
+                                <li>Tyre Pressure Check</li>
+                                <li>Full Bike Wash</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹799 <span class="old-price">₹999</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('General Bike Service')">Book Now →</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="contact-field">
-                    <label>Email ID (Optional)</label>
-                    <input type="email" name="entry.1912242979" id="bookEmail" placeholder="your@email.com">
+                <!-- 2. Car Engine Repair -->
+                <div class="svc-card" data-type="car" id="card-car-engine">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Four-Wheeler</span>
+                        <img src="assets/service_car_engine.png" alt="Car Engine Repair at MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🚗 Car Repair</span>
+                                <span class="svc-card-time">⏱ 3–6 HRS</span>
+                            </div>
+                            <h2 class="svc-card-title">Car Engine Repair &amp; Diagnostics</h2>
+                            <p class="svc-card-desc">Complete engine diagnostics, overhaul and repair for all car brands using genuine OEM parts. Certified mechanics with live repair updates.</p>
+                            <ul class="svc-checklist">
+                                <li>OBD Diagnostics Scan</li>
+                                <li>Engine Oil &amp; Filter</li>
+                                <li>Spark Plug Inspection</li>
+                                <li>Coolant Top-up</li>
+                                <li>Belt &amp; Hose Check</li>
+                                <li>Genuine Parts Only</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹3,499 <span class="old-price">₹4,200</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('Car Engine Repair')">Book Now →</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="contact-field">
-                    <label>Doorstep Location (Street / Landmark)</label>
-                    <input type="text" name="entry.798502429" id="bookLocation" placeholder="Address... " required>
+                <!-- 3. Car Wash & Detailing -->
+                <div class="svc-card" data-type="car" id="card-car-wash">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Four-Wheeler</span>
+                        <img src="assets/service_car_wash.png" alt="Car Wash and Detailing at MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🚿 Car Wash</span>
+                                <span class="svc-card-time">⏱ 45–90 MIN</span>
+                            </div>
+                            <h2 class="svc-card-title">Car Wash &amp; Premium Detailing</h2>
+                            <p class="svc-card-desc">Interior &amp; exterior deep clean with foam wash, polish, tyre shine and optional ceramic coating. Restore your car to showroom condition.</p>
+                            <ul class="svc-checklist">
+                                <li>Foam Cannon Exterior Wash</li>
+                                <li>Interior Vacuuming</li>
+                                <li>Dashboard Polish</li>
+                                <li>Tyre Shine</li>
+                                <li>Glass Cleaning</li>
+                                <li>Air Freshener</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹499 <span class="old-price">₹699</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('Car Wash & Detailing')">Book Now →</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="contact-field">
-                    <label>Additional Notes / Fault Summary (Optional)</label>
-                    <textarea name="entry.745218607" id="bookSummary" rows="3"
-                        placeholder="Explain the problem..."></textarea>
+                <!-- 4. Tyre & Wheel -->
+                <div class="svc-card" data-type="both" id="card-tyre">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Car &amp; Bike</span>
+                        <img src="assets/service_tyre.png" alt="Tyre Change and Wheel Alignment at MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🛞 Tyre &amp; Wheel</span>
+                                <span class="svc-card-time">⏱ 30–60 MIN</span>
+                            </div>
+                            <h2 class="svc-card-title">Tyre Change, Balancing &amp; Alignment</h2>
+                            <p class="svc-card-desc">Puncture repair, tyre replacement, wheel balancing and 4-wheel alignment for cars and bikes. All brands available. Fast 30-min service.</p>
+                            <ul class="svc-checklist">
+                                <li>Puncture Repair</li>
+                                <li>Tyre Replacement</li>
+                                <li>Wheel Balancing</li>
+                                <li>4-Wheel Alignment</li>
+                                <li>Valve Replacement</li>
+                                <li>All Brands Available</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹399 <span class="old-price">₹549</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('Tyre & Wheel Service')">Book Now →</button>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-primary btn-full" style="margin-top: 20px;">Confirm & Book at
-                    Doorstep</button>
-                <p id="bookingSuccess" style="margin-top: 15px; color: #22c55e; text-align: center; display: none;">✅
-                    Booking received! We will call you to confirm your slot.</p>
+                <!-- 5. Battery Service -->
+                <div class="svc-card" data-type="both" id="card-battery">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Car &amp; Bike</span>
+                        <img src="assets/service_battery.png" alt="Battery Service and Replacement at MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🔋 Battery</span>
+                                <span class="svc-card-time">⏱ 30 MIN</span>
+                            </div>
+                            <h2 class="svc-card-title">Battery Service &amp; Replacement</h2>
+                            <p class="svc-card-desc">Battery health testing, jump start assistance and replacement with top brands (Exide, Amaron, Livguard) for all cars and bikes. Quick 30-min service.</p>
+                            <ul class="svc-checklist">
+                                <li>Battery Load Test</li>
+                                <li>Jump Start Assist</li>
+                                <li>Terminal Cleaning</li>
+                                <li>Replacement &amp; Fitting</li>
+                                <li>Exide / Amaron Brands</li>
+                                <li>Warranty Included</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹399 <span class="old-price">₹499</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('Battery Service')">Book Now →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Denting & Painting -->
+                <div class="svc-card" data-type="both" id="card-denting">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Car &amp; Bike</span>
+                        <img src="assets/service_denting.png" alt="Car Denting and Painting at MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🎨 Denting &amp; Painting</span>
+                                <span class="svc-card-time">⏱ 1–3 DAYS</span>
+                            </div>
+                            <h2 class="svc-card-title">Denting, Scratch Repair &amp; Painting</h2>
+                            <p class="svc-card-desc">Scratch removal, dent repair and full body paint work. Premium finishing that restores your vehicle to showroom condition using branded paint materials.</p>
+                            <ul class="svc-checklist">
+                                <li>Scratch Removal</li>
+                                <li>Dent Pulling</li>
+                                <li>Body Filler Work</li>
+                                <li>Premium Paint Finish</li>
+                                <li>Clear Coat Sealing</li>
+                                <li>Final Polish &amp; Inspection</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹999 <span class="old-price">₹1,499</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('Denting & Painting')">Book Now →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Bike Major Service -->
+                <div class="svc-card" data-type="bike" id="card-bike-major">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Two-Wheeler</span>
+                        <img src="assets/service_bike_general.png" alt="Bike Major Service at MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🏍️ Major Service</span>
+                                <span class="svc-card-time">⏱ 3–4 HRS</span>
+                            </div>
+                            <h2 class="svc-card-title">Bike Major Service &amp; Overhaul</h2>
+                            <p class="svc-card-desc">Comprehensive bike overhaul covering all wear parts. Tappet adjustment, carburetor cleaning, full electrical check and an express wash to finish.</p>
+                            <ul class="svc-checklist">
+                                <li>Tappet Adjustment</li>
+                                <li>Carburetor Cleaning</li>
+                                <li>Spark Plug Replacement</li>
+                                <li>Coolant Flush</li>
+                                <li>Full Electrical Check</li>
+                                <li>Express Wash &amp; Polish</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹1,249 <span class="old-price">₹1,599</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('Bike Major Service')">Book Now →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Car Full Service Package -->
+                <div class="svc-card" data-type="car" id="card-car-full">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Four-Wheeler</span>
+                        <img src="assets/service_car_engine.png" alt="Full Car Service Package MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🏆 Full Package</span>
+                                <span class="svc-card-time">⏱ 4–6 HRS</span>
+                            </div>
+                            <h2 class="svc-card-title">Complete Car Service Package</h2>
+                            <p class="svc-card-desc">All-inclusive 21-point service visit — the best value in Electronic City. Covers oil, filters, brakes, AC, tyres, electrical check, battery test and a full wash.</p>
+                            <ul class="svc-checklist">
+                                <li>Oil &amp; Filter Change</li>
+                                <li>AC Cleaning &amp; Check</li>
+                                <li>Brake Fluid Top-up</li>
+                                <li>21-Point Inspection</li>
+                                <li>Interior Vacuuming</li>
+                                <li>Full Body Wash</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹3,199 <span class="old-price">₹4,000</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('Complete Car Service Package')">Book Now →</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Empty state -->
+            <div id="noServicesMsg" style="display:none; text-align:center; padding:60px 0; color:rgba(255,255,255,0.35); font-size:1rem;">
+                No services found for this filter. <a href="#" onclick="filterCards('all'); return false;" style="color:var(--red-light);">View all services →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY CHOOSE US STRIP ===== -->
+    <div class="why-strip" aria-label="Why choose MotoFixPoint">
+        <div class="container">
+            <div class="why-strip-grid">
+                <div class="why-strip-item">
+                    <div class="why-strip-icon">🏆</div>
+                    <div class="why-strip-title">Certified Mechanics</div>
+                    <div class="why-strip-desc">Trained &amp; certified for all car and bike brands</div>
+                </div>
+                <div class="why-strip-item">
+                    <div class="why-strip-icon">💰</div>
+                    <div class="why-strip-title">Transparent Pricing</div>
+                    <div class="why-strip-desc">No hidden charges — full quote before we start</div>
+                </div>
+                <div class="why-strip-item">
+                    <div class="why-strip-icon">⚡</div>
+                    <div class="why-strip-title">Same-Day Service</div>
+                    <div class="why-strip-desc">Fast turnaround — most jobs done same day</div>
+                </div>
+                <div class="why-strip-item">
+                    <div class="why-strip-icon">🛡️</div>
+                    <div class="why-strip-title">Service Warranty</div>
+                    <div class="why-strip-desc">Every repair backed by our quality guarantee</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BOOKING FORM MODAL ===== -->
+    <div class="booking-modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-label="Book a service"
+        onclick="if(event.target===this) closeBooking()">
+        <div class="booking-modal">
+            <button class="booking-modal-close" onclick="closeBooking()" aria-label="Close booking form">✕</button>
+            <h2>Book Your <span class="accent">Service</span></h2>
+            <span class="selected-service-tag" id="modalServiceTag">General Service</span>
+
+            <form id="servicesBookingForm" target="hidden_svc_iframe" onsubmit="handleSvcBooking(event)"
+                action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdGM5QID2iG-2e--9AArMdLJtzNX_5x-gcyJqUkf7_vkStg-g/formResponse">
+
+                <input type="hidden" name="entry.773745263" id="hiddenServiceName" value="" />
+
+                <div class="booking-form-row">
+                    <div class="booking-field">
+                        <label for="bName">Your Name *</label>
+                        <input type="text" id="bName" name="entry.1425802658" placeholder="Eg: Rahul Sharma" required />
+                    </div>
+                    <div class="booking-field">
+                        <label for="bPhone">Phone Number *</label>
+                        <input type="tel" id="bPhone" name="entry.1301873050" placeholder="10-digit mobile" required pattern="[0-9]{10}" />
+                    </div>
+                </div>
+
+                <div class="booking-form-row">
+                    <div class="booking-field">
+                        <label for="bVehicle">Vehicle Type *</label>
+                        <select id="bVehicle" name="entry.vehicleType" required>
+                            <option value="">Select...</option>
+                            <option value="Car">🚗 Car</option>
+                            <option value="Bike">🏍️ Bike / Scooter</option>
+                        </select>
+                    </div>
+                    <div class="booking-field">
+                        <label for="bModel">Vehicle Model *</label>
+                        <input type="text" id="bModel" name="entry.vehicleModel" placeholder="Eg: Activa 6G / Swift" required />
+                    </div>
+                </div>
+
+                <div class="booking-field">
+                    <label for="bLocation">Preferred Location</label>
+                    <input type="text" id="bLocation" name="entry.798502429" placeholder="Workshop or your address..." />
+                </div>
+
+                <div class="booking-field">
+                    <label for="bNotes">Issue / Additional Notes (Optional)</label>
+                    <textarea id="bNotes" name="entry.745218607" rows="3" placeholder="Describe the problem or any special request..."></textarea>
+                </div>
+
+                <button type="submit" class="booking-modal-submit" id="svcSubmitBtn">📩 Confirm Booking Request</button>
+                <div class="booking-success-msg" id="svcSuccessMsg">
+                    ✅ Booking received! We'll call you within 30 minutes to confirm your slot at MotoFixPoint.
+                </div>
+                <p style="text-align:center; font-size:0.75rem; color:rgba(255,255,255,0.3); margin-top:12px;">
+                    We'll call you back to confirm your slot. No commitment required.
+                </p>
             </form>
         </div>
-        <iframe name="hidden_service_iframe" id="hidden_service_iframe" style="display:none;"></iframe>
+    </div>
+    <iframe name="hidden_svc_iframe" id="hidden_svc_iframe" style="display:none;"></iframe>
 
-        <script>
-            function selectService(name) {
-                document.getElementById('selectedServiceName').value = name;
-                document.getElementById('bookingSection').style.display = 'block';
-                document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
-            }
-
-            function handleServiceBooking(e) {
-                document.getElementById('bookingSuccess').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('bookingSuccess').style.display = 'none';
-                    document.getElementById('serviceBookingForm').reset();
-                    document.getElementById('bookingSection').style.display = 'none';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 4000);
-            }
-        </script>
-    </main>
-
-    <!-- Footer same as index but with adjusted links -->
-    <footer
-        style="margin-top: 100px; padding: 60px 0; background: var(--black); text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-        <p>&copy; <span id="year"></span> MotoFixPoint. All rights reserved.</p>
+    <!-- ===== FOOTER ===== -->
+    <footer style="margin-top: 0; padding: 40px 0; background: var(--black); text-align: center; border-top: 1px solid rgba(255,255,255,0.06);">
+        <div class="container">
+            <p style="color: rgba(255,255,255,0.35); font-size:0.85rem;">
+                © <span id="year"></span> MotoFixPoint — Car &amp; Bike Repair, Electronic City, Bengaluru.
+                <a href="index.html" style="color:var(--red-light); margin-left:8px;">← Back to Home</a>
+            </p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
     <script>
-        // Local logic for services.html
-        let currentVehicle = 'bike';
-        let currentFuel = 'petrol';
+        // ── YEAR ──
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        function setVehicle(v) {
-            currentVehicle = v;
-            // Target the button that was clicked
-            const btn = event.currentTarget;
-            btn.parentElement.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const fuelToggleContainer = document.getElementById('fuelToggleContainer');
-            if (v === 'car') {
-                fuelToggleContainer.style.display = 'none';
-            } else {
-                fuelToggleContainer.style.display = 'block';
-            }
-            populateBrands();
-        }
-
-        function setFuel(f) {
-            currentFuel = f;
-            event.target.parentElement.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            populateBrands();
-        }
-
-        const data = {
-            bike: {
-                petrol: {
-                    'Hero': ['Splendor+', 'HF Deluxe', 'Passion Pro', 'XPulse 200', 'Glamour'],
-                    'Honda': ['Activa 6G', 'Shine', 'SP 125', 'Unicorn', 'Dio'],
-                    'TVS': ['Apache RTR', 'Jupiter', 'NTORQ 125', 'XL100', 'Raider'],
-                    'Royal Enfield': ['Classic 350', 'Bullet 350', 'Meteor 350', 'Himalayan', 'Hunter 350'],
-                    'Yamaha': ['MT-15', 'R15 V4', 'FZ-S', 'RayZR 125', 'Fascino']
-                },
-                electric: {
-                    'Ola': ['S1 Pro', 'S1 Air', 'S1 X'],
-                    'Ather': ['450X', '450S', 'Rizta'],
-                    'Ampere': ['Magnus EX', 'Primus', 'Reo Li Plus'],
-                    'TVS iQube': ['Standard', 'S', 'ST']
-                }
-            },
-            car: {
-                petrol: {
-                    'Maruti Suzuki': ['Alto K10', 'Swift', 'Baleno', 'Brezza', 'Ertiga', 'WagonR'],
-                    'Hyundai': ['i20', 'Venue', 'Creta', 'Verna', 'Grand i10 Nios'],
-                    'Tata': ['Nexon', 'Punch', 'Tiago', 'Altroz', 'Harrier'],
-                    'Toyota': ['Glanza', 'Urban Cruiser', 'Innova Hycross', 'Fortuner'],
-                    'Mahindra': ['XUV700', 'Scorpion N', 'Thar', 'XUV300', 'Bolero']
-                }
-            }
-        };
-
-        function populateBrands() {
-            const brandSelect = document.getElementById('brandSelect');
-            const modelSelect = document.getElementById('modelSelect');
-            brandSelect.innerHTML = '<option value="">Select Brand</option>';
-            modelSelect.innerHTML = '<option value="">Select Model</option>';
-
-            const list = (currentVehicle === 'car') ? Object.keys(data.car.petrol) : Object.keys(data.bike[currentFuel]);
-            list.forEach(b => {
-                brandSelect.innerHTML += `<option value="${b}">${b}</option>`;
+        // ── HAMBURGER ──
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
             });
         }
 
-        function updateModels() {
-            const brand = document.getElementById('brandSelect').value;
-            const modelSelect = document.getElementById('modelSelect');
-            modelSelect.innerHTML = '<option value="">Select Model</option>';
+        // ── FILTER ──
+        function filterCards(type) {
+            // Update pills
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            const activePill = document.getElementById('pill-' + type);
+            if (activePill) activePill.classList.add('active');
 
-            if (!brand) return;
+            const cards = document.querySelectorAll('.svc-card');
+            let visible = 0;
 
-            const models = (currentVehicle === 'car')
-                ? data.car.petrol[brand]
-                : data.bike[currentFuel][brand];
+            cards.forEach(card => {
+                const t = card.getAttribute('data-type');
+                let show = false;
+                if (type === 'all') show = true;
+                else if (type === 'both') show = (t === 'both');
+                else show = (t === type || t === 'both');
 
-            if (models) {
-                models.forEach(m => {
-                    modelSelect.innerHTML += `<option value="${m}">${m}</option>`;
-                });
-            }
+                if (show) {
+                    card.style.display = 'grid';
+                    card.removeAttribute('data-hidden');
+                    visible++;
+                    setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 30);
+                } else {
+                    card.style.display = 'none';
+                    card.setAttribute('data-hidden', 'true');
+                }
+            });
+
+            const noMsg = document.getElementById('noServicesMsg');
+            noMsg.style.display = visible === 0 ? 'block' : 'none';
         }
 
-        function showPricing() {
-            const list = document.getElementById('serviceList');
-            const brand = document.getElementById('brandSelect').value;
-            const model = document.getElementById('modelSelect').value;
-
-            if (!brand || !model) { alert("Please select both Brand and Model"); return; }
-
-            let services = [];
-            if (currentVehicle === 'bike' && currentFuel === 'petrol') {
-                services = [
-                    { title: 'General Service (with Oil)', price: '799', old: '899', desc: '12-point checkup, Engine oil change, Chain cleaning, Brake adjustment.' },
-                    { title: 'Major Service', price: '1249', old: '1500', desc: 'Comprehensive overhaul, Tappet adjustment, Carburetor cleaning, Full wash.' },
-                    { title: 'Express Wash & Wax', price: '199', old: '250', desc: 'High-pressure wash, Polish, Tyre shine.' }
-                ];
-            } else if (currentFuel === 'electric') {
-                services = [
-                    { title: 'EV General Checkup', price: '999', old: '1199', desc: 'Battery health report, Software check, Brake pads, Electrical lines inspection.' },
-                    { title: 'Fast Fix Running Repair', price: '450', old: '649', desc: 'Minor adjustments, Bolt tightening, Mirror fixing, Light check.' }
-                ];
-            } else {
-                services = [
-                    { title: 'Car Basic Service', price: '3199', old: '3500', desc: 'Oil filter, Air filter, 21-point checkup, Interior vacuuming.' },
-                    { title: 'Comprehensive Package', price: '4427', old: '5000', desc: 'AC cleaning, Brake fluid top-up, Engine tuning, Full body wash.' }
-                ];
-            }
-
-            list.innerHTML = services.map(s => `
-                <div class="service-item-card">
-                    <div>
-                        <h3>${s.title}</h3>
-                        <p style="font-size: 0.85rem; color: var(--mid); margin-top: 5px;">${s.desc}</p>
-                        <div class="price-tag">₹${s.price} <span>₹${s.old}</span></div>
-                    </div>
-                    <button class="btn-primary" style="padding: 10px 20px;" onclick="selectService('${s.title}')">Add to Quote</button>
-                </div>
-            `).join('');
+        // ── BOOKING MODAL ──
+        function openBooking(serviceName) {
+            document.getElementById('modalServiceTag').textContent = serviceName;
+            document.getElementById('hiddenServiceName').value = serviceName;
+            document.getElementById('bookingModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        populateBrands();
-        document.getElementById('year').textContent = new Date().getFullYear();
+        function closeBooking() {
+            document.getElementById('bookingModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleSvcBooking(e) {
+            const btn = document.getElementById('svcSubmitBtn');
+            const msg = document.getElementById('svcSuccessMsg');
+            btn.textContent = '⏳ Sending...';
+            btn.disabled = true;
+            setTimeout(() => {
+                msg.style.display = 'block';
+                btn.textContent = '✅ Booking Sent!';
+                setTimeout(() => {
+                    msg.style.display = 'none';
+                    btn.textContent = '📩 Confirm Booking Request';
+                    btn.disabled = false;
+                    document.getElementById('servicesBookingForm').reset();
+                    closeBooking();
+                }, 4000);
+            }, 1000);
+        }
+
+        // ── ESC to close modal ──
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeBooking();
+        });
     </script>
 </body>
-
 </html>

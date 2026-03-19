@@ -107,6 +107,7 @@
     <!-- ===== ENTRY MODAL ===== -->
     <div class="entry-modal-overlay" id="entryModal">
         <div class="entry-modal-content">
+            <button class="entry-modal-close" id="entryModalClose" onclick="closeEntryModal()" aria-label="Close">✕</button>
             <img src="assets/logo.png" alt="MotoFixPoint Logo" class="entry-modal-logo" onerror="this.style.display='none'" />
             <h2>Welcome to MotoFixPoint</h2>
             <p><strong>Real-time doorstep repairs</strong><br>We come to you — home, office or roadside.</p>
@@ -117,6 +118,7 @@
                 </div>
                 <button type="submit" class="btn-primary btn-full">Connect with Mechanic</button>
             </form>
+            <p class="entry-skip-text">Just browsing? <a href="#" onclick="closeEntryModal(); return false;">Skip for now →</a></p>
         </div>
     </div>
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { window.location.reload(); }"></iframe>
