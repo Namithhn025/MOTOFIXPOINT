@@ -1674,15 +1674,25 @@ ul {
 
     .service-card {
         padding: 24px 20px;
+        background: linear-gradient(145deg, rgba(34,34,34,1) 0%, var(--dark2) 100%);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .service-card h3 {
-        font-size: 1.15rem;
+        font-size: 1.25rem;
     }
 
     .service-icon {
-        font-size: 2rem;
+        font-size: 2.2rem;
         margin-bottom: 12px;
+    }
+
+    .whatsapp-float {
+        bottom: 20px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
     }
 }
 
