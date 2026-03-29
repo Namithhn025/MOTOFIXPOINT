@@ -177,7 +177,7 @@ ul {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 16px 0;
+    padding: 24px 0;
     transition: var(--transition);
     background: transparent;
 }
@@ -206,7 +206,7 @@ ul {
 }
 
 .logo-img {
-    height: 54px;
+    height: 80px;
     width: auto;
 }
 
@@ -344,6 +344,75 @@ ul {
     margin: -60px auto 0; /* Shifted UP further */
     padding: 10px 40px;
     text-align: center;
+}
+
+.immediate-connect {
+    margin-top: 30px;
+    animation: fadeInUp 0.7s ease 0.5s both;
+}
+
+.connect-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(37, 211, 102, 0.1);
+    border: 1px solid rgba(37, 211, 102, 0.4);
+    color: #25D366;
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.connect-chip:hover {
+    background: rgba(37, 211, 102, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.2);
+}
+
+.pulse-icon {
+    width: 10px;
+    height: 10px;
+    background: #25D366;
+    border-radius: 50%;
+    position: relative;
+}
+
+.pulse-icon::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid #25D366;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.float-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+    transition: var(--transition);
+}
+
+.float-whatsapp:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
 }
 
 .hero-badge {

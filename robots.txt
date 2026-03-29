@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Note: Search engine keywords belong in the HTML meta tags, not here. 
+# robots.txt is only for crawler instructions.
+# Adding keywords here for user reference:
+# Keywords: MotoFixPoint, Moto Fix Point, Car Repair Electronic City, Bike Service Bengaluru
+
+Sitemap: https://motofixpoint.com/sitemap.xml
