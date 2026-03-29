@@ -9,7 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png" />
+    <link rel="shortcut icon" href="favicon.png" />
     <link rel="stylesheet" href="style.css" />
     <style>
         :root {
@@ -274,15 +277,18 @@
         <div class="nav-container">
             <a href="index.html" class="nav-logo" aria-label="MotoFixPoint Home">
                 <img src="assets/logo.png" alt="Elephant Logo" class="logo-img" />
-                <span class="logo-text">MotoFixPoint</span>
+                <span class="logo-text"><span class="logo-moto">MOTO</span><span class="logo-fix">FIX</span><span class="logo-point">POINT</span></span>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="gallery.html" class="nav-active">Gallery</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <a href="tel:+919886330066" class="nav-cta">📞 Call Now</a>
+            <a href="tel:+919886330066" class="nav-cta" id="navCallBtn">📞 Call Now</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -317,8 +323,62 @@
         </div>
     </div>
 
-    <footer style="margin-top: 100px; padding: 60px 0; background: #080808; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-        <p>&copy; <span id="year"></span> MotoFixPoint. All rights reserved.</p>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" aria-label="Site footer">
+        <div class="footer-top">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-logo">
+                        <span class="logo-moto">MOTO</span><span class="logo-fix">FIX</span><span
+                            class="logo-point">POINT</span>
+                    </span>
+                    <p>Electronic City, Bengaluru's trusted car &amp; bike repair workshop. Expert mechanics, genuine
+                        parts, fast service.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" id="social-insta"
+                            aria-label="Follow MotoFixPoint on Instagram">📸</a>
+                        <a href="#" class="social-btn" id="social-fb"
+                            aria-label="Follow MotoFixPoint on Facebook">👥</a>
+                        <a href="https://wa.me/919886933001" class="social-btn" id="social-wa"
+                            aria-label="Chat with MotoFixPoint on WhatsApp" target="_blank" rel="noopener">💬</a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Car Services</h4>
+                    <ul>
+                        <li><a href="services.html">Car Full Service</a></li>
+                        <li><a href="services.html">Car Engine Repair</a></li>
+                        <li><a href="services.html">Car Wash &amp; Detailing</a></li>
+                        <li><a href="services.html">Car Tyre &amp; Wheel</a></li>
+                        <li><a href="services.html">Car AC Repair</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Bike Services</h4>
+                    <ul>
+                        <li><a href="services.html">Bike Full Service</a></li>
+                        <li><a href="services.html">Bike Engine Repair</a></li>
+                        <li><a href="services.html">Bike Wash</a></li>
+                        <li><a href="services.html">Tyre &amp; Wheel</a></li>
+                        <li><a href="services.html">Electrical Repair</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact-col">
+                    <h4>Contact</h4>
+                    <p>📞 <a href="tel:+919886330066">+91 98863 30066</a></p>
+                    <p>💬 <a href="https://wa.me/919886933001" target="_blank" rel="noopener">WhatsApp Us</a></p>
+                    <p>📍 Electronic City, Bengaluru, KA</p>
+                    <p>🕐 Mon–Sun: 9:00 AM – 9:00 PM</p>
+                    <p>🌐 <a href="https://motofixpoint.com">motofixpoint.com</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 MotoFixPoint — Car &amp; Bike Repair | Electronic City, Bengaluru | <a
+                        href="https://motofixpoint.com">motofixpoint.com</a></p>
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -467,6 +527,15 @@
             if (e.key === 'ArrowLeft') changeImage(-1);
             if (e.key === 'Escape') closeLightbox();
         });
+
+        // ── HAMBURGER ──
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+            });
+        }
 
         fetchGallery();
     </script>

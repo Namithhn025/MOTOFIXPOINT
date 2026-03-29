@@ -1507,19 +1507,49 @@ ul {
     .nav-links.open {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: fixed;
-        top: 70px;
+        top: 0;
         left: 0;
-        right: 0;
-        background: rgba(13, 13, 13, 0.97);
-        backdrop-filter: blur(12px);
-        padding: 24px;
-        gap: 20px;
-        border-bottom: 1px solid rgba(250, 5, 5, 0.3);
+        width: 100%;
+        height: 100vh;
+        background: rgba(13, 13, 13, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 40px;
+        gap: 30px;
+        z-index: 999;
+        border-bottom: none;
+        animation: menuFadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    .nav-links.open+.nav-cta {
-        display: block;
+    .nav-links.open a {
+        font-family: var(--font-head);
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--white);
+    }
+
+    .nav-links.open + .nav-cta {
+        display: flex;
+        position: fixed;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 48px);
+        max-width: 350px;
+        justify-content: center;
+        z-index: 1000;
+        padding: 16px;
+        font-size: 1.1rem;
+        box-shadow: 0 15px 40px rgba(250, 5, 5, 0.4);
+    }
+
+    .hamburger {
+        z-index: 1001;
+        position: relative;
     }
 
     .hero-stats {
@@ -1597,27 +1627,32 @@ ul {
 
     .hero-actions {
         flex-direction: column;
-    }
-
-    .hero-img-wrapper {
-        max-width: 100%;
-    }
-
-    .hero-image-side {
-        padding: 0 20px 48px;
-    }
-
-    .hero-content {
-        padding: 100px 20px 32px;
+        gap: 12px;
     }
 
     .service-toggle {
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .toggle-btn {
+        width: 100%;
+        text-align: center;
     }
 
     .form-row {
         grid-template-columns: 1fr;
     }
+}
+
+@keyframes menuFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== SERVICE TOGGLE TABS ===== */
