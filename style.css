@@ -177,7 +177,7 @@ ul {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 12px 0;
+    padding: 20px 0;
     transition: var(--transition);
     background: transparent;
 }
@@ -206,7 +206,7 @@ ul {
 }
 
 .logo-img {
-    height: 50px;
+    height: 85px;
     width: auto;
 }
 
