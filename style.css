@@ -300,8 +300,9 @@ ul {
     display: none;
     flex-direction: column;
     gap: 5px;
-    background: none;
-    border: none;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
     cursor: pointer;
     padding: 4px;
     margin-left: auto;
@@ -1535,7 +1536,7 @@ ul {
     .nav-links.open + .nav-cta {
         display: flex;
         position: fixed;
-        bottom: 60px;
+        bottom: 120px; /* Moved up to clear WhatsApp float */
         left: 50%;
         transform: translateX(-50%);
         width: calc(100% - 48px);
@@ -1550,6 +1551,9 @@ ul {
     .hamburger {
         z-index: 1001;
         position: relative;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
     }
 
     .hero-stats {
@@ -1631,22 +1635,43 @@ ul {
     }
 
     .service-toggle {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        max-width: 280px;
-        margin-left: auto;
-        margin-right: auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        align-items: stretch;
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        padding: 0 20px 20px 20px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+    }
+
+    .service-toggle::-webkit-scrollbar {
+        display: none; /* Hide scrollbar Webkit */
     }
 
     .toggle-btn {
-        width: 100%;
-        text-align: center;
+        flex: 0 0 auto;
+        width: auto;
+        white-space: nowrap;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 24px 20px;
+    }
+
+    .service-card h3 {
+        font-size: 1.15rem;
+    }
+
+    .service-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
     }
 }
 
