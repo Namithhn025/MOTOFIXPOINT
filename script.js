@@ -151,13 +151,6 @@ function filterServices(type) {
       }, 30);
     }
   });
-
-  // Fix grid column for service-card--full based on filter
-  const fullCard = document.getElementById('svc-fullservice');
-  if (fullCard && fullCard.style.display !== 'none') {
-    const visibleCount = [...cards].filter(c => c.style.display !== 'none').length;
-    fullCard.style.gridColumn = visibleCount <= 3 ? 'span 1' : 'span 2';
-  }
 }
 
 // ===== FORM SUBMIT =====
