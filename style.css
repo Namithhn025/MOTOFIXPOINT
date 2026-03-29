@@ -210,6 +210,15 @@ ul {
     width: auto;
 }
 
+.logo-text {
+    font-family: var(--font-head);
+    font-size: 1.8rem;
+    color: var(--white);
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
+
 .logo-fallback {
     font-family: var(--font-head);
     font-size: 2rem;
