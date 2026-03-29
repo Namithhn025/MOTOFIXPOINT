@@ -310,11 +310,24 @@ ul {
 
 .hamburger span {
     display: block;
-    width: 24px;
+    width: 26px;
     height: 2px;
     background: var(--white);
     border-radius: 2px;
-    transition: var(--transition);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: 2px center;
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg);
 }
 
 /* ===== HERO ===== */
@@ -581,14 +594,15 @@ ul {
 }
 
 .service-card {
-    background: var(--dark2);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: var(--radius);
-    padding: 28px 24px;
-    transition: var(--transition);
+    padding: 32px 28px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     overflow: hidden;
     cursor: default;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
 .service-card::before {
@@ -605,9 +619,9 @@ ul {
 }
 
 .service-card:hover {
-    border-color: rgba(250, 5, 5, 0.4);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    border-color: rgba(250, 5, 5, 0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25);
 }
 
 .service-card:hover::before {
@@ -616,8 +630,8 @@ ul {
 
 .service-card--full {
     grid-column: span 4;
-    background: linear-gradient(135deg, rgba(250, 5, 5, 0.15) 0%, rgba(212, 55, 10, 0.08) 100%);
-    border-color: rgba(250, 5, 5, 0.3);
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    border-color: rgba(250, 5, 5, 0.2);
     display: flex;
     align-items: center;
     gap: 24px;
@@ -642,17 +656,17 @@ ul {
 }
 
 .service-card h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--white);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #111111;
     margin-bottom: 8px;
 }
 
 .service-card p {
-    font-size: 0.85rem;
-    color: var(--mid);
+    font-size: 0.9rem;
+    color: #555555;
     line-height: 1.6;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .service-card--full p {
@@ -662,13 +676,14 @@ ul {
 
 .service-tag {
     display: inline-block;
-    background: rgba(250, 5, 5, 0.2);
-    border: 1px solid rgba(250, 5, 5, 0.4);
-    color: var(--red-light);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 4px 12px;
+    background: rgba(250, 5, 5, 0.08);
+    border: 1px solid rgba(250, 5, 5, 0.2);
+    color: var(--red);
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 6px 14px;
     border-radius: 999px;
+    letter-spacing: 0.5px;
 }
 
 /* ===== HOW IT WORKS ===== */
@@ -1351,7 +1366,7 @@ ul {
     position: fixed;
     bottom: 28px;
     right: 28px;
-    z-index: 999;
+    z-index: 900;
     width: 56px;
     height: 56px;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
@@ -1519,44 +1534,45 @@ ul {
     .nav-links.open {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100vh;
         background: rgba(13, 13, 13, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        padding: 40px;
-        gap: 30px;
+        padding: 100px 40px 40px 40px;
+        gap: 24px;
         z-index: 999;
         border-bottom: none;
-        animation: menuFadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        animation: menuFadeIn 0.3s ease-out;
     }
 
     .nav-links.open a {
-        font-family: var(--font-head);
-        font-size: 2.2rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--white);
+        font-family: var(--font-body);
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: none;
+        color: rgba(255, 255, 255, 0.9);
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        padding-bottom: 16px;
     }
 
     .nav-links.open + .nav-cta {
         display: flex;
         position: fixed;
-        bottom: 120px; /* Moved up to clear WhatsApp float */
+        bottom: 40px;
         left: 50%;
         transform: translateX(-50%);
-        width: calc(100% - 48px);
-        max-width: 350px;
+        width: calc(100% - 60px);
         justify-content: center;
         z-index: 1000;
         padding: 16px;
         font-size: 1.1rem;
-        box-shadow: 0 15px 40px rgba(250, 5, 5, 0.4);
+        border-radius: 999px;
     }
 
     .hamburger {
@@ -1646,26 +1662,23 @@ ul {
     }
 
     .service-toggle {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        justify-content: flex-start;
-        align-items: stretch;
-        width: calc(100% + 40px);
-        margin-left: -20px;
-        padding: 0 20px 20px 20px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Hide scrollbar Firefox */
-    }
-
-    .service-toggle::-webkit-scrollbar {
-        display: none; /* Hide scrollbar Webkit */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        margin-bottom: 30px;
     }
 
     .toggle-btn {
-        flex: 0 0 auto;
-        width: auto;
-        white-space: nowrap;
+        flex: 1 1 calc(50% - 12px);
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .toggle-btn#tab-all {
+        flex: 1 1 100%; 
     }
 
     .form-row {
@@ -1673,9 +1686,9 @@ ul {
     }
 
     .service-card {
-        padding: 24px 20px;
-        background: linear-gradient(145deg, rgba(34,34,34,1) 0%, var(--dark2) 100%);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        padding: 30px 24px;
+        background: #ffffff;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     }
 
     .service-card h3 {
