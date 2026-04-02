@@ -2,7 +2,7 @@
 
 Official website for **MotoFixPoint** — Electronic City, Bengaluru's trusted car & bike repair and servicing workshop.
 
-🌐 **Live Site:** [motofixpoint.com](https://motofixpoint.com)
+🌐 **Live Site:** [motofixpoint.com](https://www.motofixpoint.com)
 
 ---
 
@@ -47,7 +47,7 @@ This is a **static HTML site** — no build step needed.
 4. Root directory: `/`
 5. Deploy ✅
 
-Add your custom domain `motofixpoint.com` in Vercel → Domains.
+Add your custom domain `www.motofixpoint.com` in Vercel → Domains.
 
 ---
 
