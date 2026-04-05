@@ -165,8 +165,9 @@
         <div class="hero-bg-pattern"></div>
         <div class="hero-content">
             <div class="hero-badge" id="heroBadge">
-                📍 <span id="locationText">Electronic City, Bengaluru</span>
+                📍 <span id="locationText">Garebhavipalya, Bengaluru</span>
             </div>
+
             <h1 class="hero-title">
                 Car &amp; Bike Repair<br />
                 <span class="hero-title-accent">Near You — Done Right.</span>
@@ -209,15 +210,17 @@
         <!-- Moved Marquee inside Hero for instant visibility -->
         <div class="marquee-strip" aria-hidden="true">
             <div class="marquee-track">
-                <span>🔧 Car Repair</span><span>•</span>
-                <span>🏍️ Bike Repair</span><span>•</span>
-                <span>🚿 Car Wash</span><span>•</span>
-                <span>✨ Bike Wash</span><span>•</span>
-                <span>⚙️ Engine Repair</span><span>•</span>
-                <span>🛞 Tyre Change</span><span>•</span>
-                <span>🔋 Battery Service</span><span>•</span>
-                <span>🎨 Denting &amp; Painting</span><span>•</span>
-                <span>⚡ Electrical Repair</span><span>•</span>
+                <span>🏍️ Bike Full Service</span>
+                <span class="dot">•</span>
+                <span>🚗 Car Full Service</span>
+                <span class="dot">•</span>
+                <span>⚡ Electric Bike Service</span>
+                <span class="dot">•</span>
+                <span>🎨 Car &amp; Bike Painting</span>
+                <span class="dot">•</span>
+                <span>🧼 Professional Wash</span>
+                <span class="dot">•</span>
+                <span>🦷 Denting &amp; Painting</span>
             </div>
         </div>
     </section>
@@ -234,16 +237,28 @@
             </div>
 
             <!-- Service type toggle -->
+            <!-- Service type toggle -->
             <div class="service-toggle" role="tablist" aria-label="Select vehicle type">
                 <button class="toggle-btn active" id="tab-all" role="tab" aria-selected="true"
                     onclick="filterServices('all')">All Services</button>
                 <button class="toggle-btn" id="tab-car" role="tab" aria-selected="false"
-                    onclick="filterServices('car')">🚗 Car Services</button>
+                    onclick="filterServices('car')">🚗 Car</button>
                 <button class="toggle-btn" id="tab-bike" role="tab" aria-selected="false"
-                    onclick="filterServices('bike')">🏍️ Bike Services</button>
+                    onclick="filterServices('bike')">🏍️ Bike</button>
+                <button class="toggle-btn" id="tab-ev" role="tab" aria-selected="false"
+                    onclick="filterServices('ev')">⚡ Electric</button>
             </div>
 
             <div class="services-grid" id="servicesGrid">
+                <!-- ELECTRIC BIKE SERVICE -->
+                <div class="service-card" id="svc-ev-service" data-type="bike">
+                    <div class="service-icon">⚡</div>
+                    <div class="service-vehicle-tag bike-tag">Electric</div>
+                    <h3>Electric Bike Service</h3>
+                    <p>Specialized EV maintenance, battery health diagnosis, and motor servicing for all electric bikes.</p>
+                    <span class="service-tag">Starting ₹499</span>
+                </div>
+
                 <!-- CAR SERVICES -->
                 <div class="service-card" id="svc-car-service" data-type="car">
                     <div class="service-icon">🚗</div>
@@ -324,6 +339,13 @@
                     <h3>Electrical &amp; AC Repair</h3>
                     <p>Wiring, lighting, starter motors, car AC gas refill and compressor repair for all vehicles.</p>
                     <span class="service-tag">Starting ₹799</span>
+                </div>
+                <div class="service-card" id="svc-bike-wash" data-type="bike">
+                    <div class="service-icon">🚿</div>
+                    <div class="service-vehicle-tag bike-tag">Bike</div>
+                    <h3>Professional Bike Wash</h3>
+                    <p>High-pressure foam wash, chain cleaning, and polishing to make your bike shine.</p>
+                    <span class="service-tag">Starting ₹199</span>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 50px;">
@@ -471,6 +493,7 @@
 
     <script>
         const GALLERY_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxSVACJI48Iec-Bnx4bvscsjkKLHoHTPfKsBuotvpg8I0jPWBTDuVKLQxpjHHXcOSy1cdpBCyp9ary/pub?output=csv';
+        const GALLERY_JSON = 'assets/gallery_data.json';
         let currentProjectImages = [];
         let currentIndex = 0;
 
@@ -493,9 +516,24 @@
 
         async function fetchHomeGallery() {
             const container = document.getElementById('homeGalleryContainer');
+            
+            // 1. Try local JSON first
+            try {
+                const localResp = await fetch(GALLERY_JSON);
+                if (localResp.ok) {
+                    const localData = await localResp.json();
+                    if (localData && localData.length > 0) {
+                        renderHome(localData.slice(0, 3));
+                        return;
+                    }
+                }
+            } catch (e) { console.log('Local gallery cache not found.'); }
+
+            // 2. Fallback to localStorage cache
             const cached = localStorage.getItem('motofix_gallery_cache');
             if (cached) renderHome(JSON.parse(cached).slice(0, 3));
 
+            // 3. Last resort: Live CSV
             try {
                 const response = await fetch(GALLERY_CSV);
                 const data = await response.text();
@@ -718,7 +756,7 @@
                             <div class="contact-icon">📍</div>
                             <div>
                                 <strong>Workshop Location</strong>
-                                <a href="https://maps.google.com/?q=MotoFixPoint+Electronic+City+Bengaluru"
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=37/2,+Vinayaka+Temple,+Pappya+Reddy+Layout,+Garebhavipalya,+Hongasandra,+Bommanahalli,+Bengaluru,+Karnataka+560114"
                                     target="_blank" rel="noopener">Electronic City, Bengaluru — Get Directions</a>
                             </div>
                         </div>
@@ -739,63 +777,63 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" id="bookingForm" onsubmit="handleFormSubmit(event)" novalidate>
+                <form class="contact-form" id="bookingForm" target="hidden_iframe" onsubmit="handleFormSubmit(event)" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdGM5QID2iG-2e--9AArMdLJtzNX_5x-gcyJqUkf7_vkStg-g/formResponse">
                     <h3>Quick Booking Request</h3>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="fname">Your Name *</label>
-                            <input type="text" id="fname" name="name" placeholder="Eg: Rahul Sharma" required
+                            <input type="text" id="fname" name="entry.1425802658" placeholder="Eg: Rahul Sharma" required
                                 autocomplete="name" />
                         </div>
                         <div class="form-group">
                             <label for="fphone">Phone Number *</label>
-                            <input type="tel" id="fphone" name="phone" placeholder="Eg: 9876543210" required
-                                autocomplete="tel" />
+                            <input type="tel" id="fphone" name="entry.1301873050" placeholder="Eg: 9876543210" required
+                                autocomplete="tel" pattern="[0-9]{10}" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="fvehicle-type">Vehicle Type *</label>
-                            <select id="fvehicle-type" name="vehicle_type" required>
+                            <select id="fvehicle-type" name="entry.798502429" required>
                                 <option value="">Car or Bike?</option>
-                                <option value="car">🚗 Car</option>
-                                <option value="bike">🏍️ Bike / Scooter</option>
+                                <option value="Car">🚗 Car</option>
+                                <option value="Bike">🏍️ Bike / Scooter</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="fbike">Vehicle Model *</label>
-                            <input type="text" id="fbike" name="vehicle_model"
+                            <input type="text" id="fbike" name="entry.745218607"
                                 placeholder="Eg: Maruti Swift / RE Classic 350" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="fservice">Service Needed</label>
-                        <select id="fservice" name="service">
+                        <select id="fservice" name="entry.773745263">
                             <option value="">Select a service...</option>
                             <optgroup label="Car Services">
-                                <option>Car Full Service</option>
-                                <option>Car Engine Repair</option>
-                                <option>Car Wash &amp; Detailing</option>
-                                <option>Car Tyre &amp; Wheel</option>
-                                <option>Car AC Repair</option>
-                                <option>Car Electrical Repair</option>
-                                <option>Car Denting &amp; Painting</option>
-                                <option>Car Battery Service</option>
+                                <option value="Car Full Service">Car Full Service</option>
+                                <option value="Car Engine Repair">Car Engine Repair</option>
+                                <option value="Car Wash &amp; Detailing">Car Wash &amp; Detailing</option>
+                                <option value="Car Tyre &amp; Wheel">Car Tyre &amp; Wheel</option>
+                                <option value="Car AC Repair">Car AC Repair</option>
+                                <option value="Car Electrical Repair">Car Electrical Repair</option>
+                                <option value="Car Denting &amp; Painting">Car Denting &amp; Painting</option>
+                                <option value="Car Battery Service">Car Battery Service</option>
                             </optgroup>
                             <optgroup label="Bike Services">
-                                <option>Bike Full Service</option>
-                                <option>Bike Engine Repair</option>
-                                <option>Bike Wash</option>
-                                <option>Bike Tyre Change</option>
-                                <option>Bike Electrical Repair</option>
-                                <option>Bike Battery Service</option>
+                                <option value="Bike Full Service">Bike Full Service</option>
+                                <option value="Bike Engine Repair">Bike Engine Repair</option>
+                                <option value="Bike Wash">Bike Wash</option>
+                                <option value="Bike Tyre Change">Bike Tyre Change</option>
+                                <option value="Bike Electrical Repair">Bike Electrical Repair</option>
+                                <option value="Bike Battery Service">Bike Battery Service</option>
                             </optgroup>
-                            <option>Other / Not Sure</option>
+                            <option value="Other / Not Sure">Other / Not Sure</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="fmessage">Describe the Issue (Optional)</label>
-                        <textarea id="fmessage" name="message" rows="3"
+                        <textarea id="fmessage" name="entry.745218607" rows="3"
                             placeholder="Any specific problem, noise, or request..."></textarea>
                     </div>
                     <button type="submit" class="btn-primary btn-full" id="submitBtn">📩 Send Booking Request</button>
@@ -852,7 +890,7 @@
                     <h4>Contact</h4>
                     <p>📞 <a href="tel:+919886330066">+91 98863 30066</a></p>
                     <p>💬 <a href="https://wa.me/919886933001" target="_blank" rel="noopener">WhatsApp Us</a></p>
-                    <p>📍 Electronic City, Bengaluru, KA</p>
+                    <p>📍 <a href="https://www.google.com/maps/dir/?api=1&destination=37/2,+Vinayaka+Temple,+Pappya+Reddy+Layout,+Garebhavipalya,+Hongasandra,+Bommanahalli,+Bengaluru,+Karnataka+560114" target="_blank" rel="noopener">Electronic City, Bengaluru, KA</a></p>
                     <p>🕐 Mon–Sun: 9:00 AM – 9:00 PM</p>
                     <p>🌐 <a href="https://www.motofixpoint.com">motofixpoint.com</a></p>
                 </div>

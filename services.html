@@ -636,9 +636,9 @@
             <span class="filter-label">Filter by:</span>
             <div class="filter-pills" role="group" aria-label="Filter services by type">
                 <button class="filter-pill active" id="pill-all" onclick="filterCards('all')">All Services</button>
-                <button class="filter-pill" id="pill-car" onclick="filterCards('car')">🚗 Car</button>
-                <button class="filter-pill" id="pill-bike" onclick="filterCards('bike')">🏍️ Bike</button>
-                <button class="filter-pill" id="pill-both" onclick="filterCards('both')">🔧 Car &amp; Bike</button>
+                <button class="filter-pill" onclick="filterCards('bike')" id="pill-bike">Bike</button>
+                <button class="filter-pill" onclick="filterCards('car')" id="pill-car">Car</button>
+                <button class="filter-pill" onclick="filterCards('electric')" id="pill-electric">Electric</button>
             </div>
         </div>
     </div>
@@ -651,7 +651,7 @@
                 <!-- 1. Bike General Service -->
                 <div class="svc-card" data-type="bike" id="card-bike-service">
                     <div class="svc-card-img">
-                        <span class="svc-card-type-badge">Two-Wheeler</span>
+                        <span class="svc-card-type-badge">Bike</span>
                         <img src="assets/service_bike_general.png" alt="Bike General Service at MotoFixPoint" loading="lazy" />
                     </div>
                     <div class="svc-card-body">
@@ -684,7 +684,7 @@
                 <!-- 2. Car Engine Repair -->
                 <div class="svc-card" data-type="car" id="card-car-engine">
                     <div class="svc-card-img">
-                        <span class="svc-card-type-badge">Four-Wheeler</span>
+                        <span class="svc-card-type-badge">Car</span>
                         <img src="assets/service_car_engine.png" alt="Car Engine Repair at MotoFixPoint" loading="lazy" />
                     </div>
                     <div class="svc-card-body">
@@ -717,7 +717,7 @@
                 <!-- 3. Car Wash & Detailing -->
                 <div class="svc-card" data-type="car" id="card-car-wash">
                     <div class="svc-card-img">
-                        <span class="svc-card-type-badge">Four-Wheeler</span>
+                        <span class="svc-card-type-badge">Car</span>
                         <img src="assets/service_car_wash.png" alt="Car Wash and Detailing at MotoFixPoint" loading="lazy" />
                     </div>
                     <div class="svc-card-body">
@@ -816,7 +816,7 @@
                 <!-- 6. Car Denting & Painting -->
                 <div class="svc-card" data-type="car" id="card-car-denting">
                     <div class="svc-card-img">
-                        <span class="svc-card-type-badge">Four-Wheeler</span>
+                        <span class="svc-card-type-badge">Car</span>
                         <img src="assets/service_denting.png" alt="Car Denting and Painting at MotoFixPoint" loading="lazy" />
                     </div>
                     <div class="svc-card-body">
@@ -849,7 +849,7 @@
                 <!-- 6b. Bike Denting & Painting -->
                 <div class="svc-card" data-type="bike" id="card-bike-denting">
                     <div class="svc-card-img">
-                        <span class="svc-card-type-badge">Two-Wheeler</span>
+                        <span class="svc-card-type-badge">Bike</span>
                         <img src="assets/service_bike_denting.png" alt="Bike Denting and Painting at MotoFixPoint" loading="lazy" />
                     </div>
                     <div class="svc-card-body">
@@ -882,7 +882,7 @@
                 <!-- 7. Bike Major Service -->
                 <div class="svc-card" data-type="bike" id="card-bike-major">
                     <div class="svc-card-img">
-                        <span class="svc-card-type-badge">Two-Wheeler</span>
+                        <span class="svc-card-type-badge">Bike</span>
                         <img src="assets/service_bike_general.png" alt="Bike Major Service at MotoFixPoint" loading="lazy" />
                     </div>
                     <div class="svc-card-body">
@@ -915,7 +915,7 @@
                 <!-- 8. Car Full Service Package -->
                 <div class="svc-card" data-type="car" id="card-car-full">
                     <div class="svc-card-img">
-                        <span class="svc-card-type-badge">Four-Wheeler</span>
+                        <span class="svc-card-type-badge">Car</span>
                         <img src="assets/service_car_engine.png" alt="Full Car Service Package MotoFixPoint" loading="lazy" />
                     </div>
                     <div class="svc-card-body">
@@ -941,6 +941,127 @@
                                 <div class="svc-price">₹3,499 <span class="old-price">₹4,500</span></div>
                             </div>
                             <button class="svc-book-btn" onclick="openBooking('Complete Car Service Package')">Book Now →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Electric General Service -->
+                <div class="svc-card" data-type="electric" id="card-ev-general">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Electric</span>
+                        <img src="assets/service_ev.png" alt="Electric General Service MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">⚡ General Service</span>
+                                <span class="svc-card-time">⏱ 2 HRS</span>
+                            </div>
+                            <h2 class="svc-card-title">General EV Service</h2>
+                            <p class="svc-card-desc">• No engine oil needed<br>• Complete EV checkup</p>
+                            <ul class="svc-checklist">
+                                <li>Battery health check</li>
+                                <li>Motor inspection</li>
+                                <li>Brake check</li>
+                                <li>Tyre pressure check</li>
+                                <li>Electrical system check</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹999 <span class="old-price">₹1,199</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('General EV Service')">Checkout →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Electric Running Repair -->
+                <div class="svc-card" data-type="electric" id="card-ev-running">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Electric</span>
+                        <img src="assets/service_ev.png" alt="Electric Running Repair MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🛠️ Running Repair</span>
+                                <span class="svc-card-time">⏱ 1 HR</span>
+                            </div>
+                            <h2 class="svc-card-title">EV Running Repair</h2>
+                            <p class="svc-card-desc">• On-the-spot repair</p>
+                            <ul class="svc-checklist">
+                                <li>Diagnosis</li>
+                                <li>Repair</li>
+                                <li>Test ride</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹450 <span class="old-price">₹649</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('EV Running Repair')">Checkout →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Electric Jump Start -->
+                <div class="svc-card" data-type="electric" id="card-ev-jumpstart">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Electric</span>
+                        <img src="assets/service_battery.png" alt="Electric Jump Start MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🔋 Jump Start</span>
+                                <span class="svc-card-time">⏱ 30 MINS</span>
+                            </div>
+                            <h2 class="svc-card-title">EV Jump Start</h2>
+                            <p class="svc-card-desc">• Quick response</p>
+                            <ul class="svc-checklist">
+                                <li>Battery boost</li>
+                                <li>Electrical check</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹450 <span class="old-price">₹649</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('EV Jump Start')">Checkout →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Electric Puncture Repair -->
+                <div class="svc-card" data-type="electric" id="card-ev-puncture">
+                    <div class="svc-card-img">
+                        <span class="svc-card-type-badge">Electric</span>
+                        <img src="assets/service_tyre.png" alt="Electric Puncture Repair MotoFixPoint" loading="lazy" />
+                    </div>
+                    <div class="svc-card-body">
+                        <div class="svc-card-top">
+                            <div class="svc-card-meta">
+                                <span class="svc-card-category">🛞 Puncture Repair</span>
+                                <span class="svc-card-time">⏱ 30 MINS</span>
+                            </div>
+                            <h2 class="svc-card-title">EV Puncture Repair</h2>
+                            <p class="svc-card-desc">• Tube and tubeless support</p>
+                            <ul class="svc-checklist">
+                                <li>Puncture identification</li>
+                                <li>Repair or replacement</li>
+                                <li>Tyre pressure check</li>
+                            </ul>
+                        </div>
+                        <div class="svc-card-bottom">
+                            <div class="svc-price-block">
+                                <div class="svc-price-label">Starting From</div>
+                                <div class="svc-price">₹600 <span class="old-price">₹799</span></div>
+                            </div>
+                            <button class="svc-book-btn" onclick="openBooking('EV Puncture Repair')">Checkout →</button>
                         </div>
                     </div>
                 </div>
@@ -1086,7 +1207,7 @@
                     <h4>Contact</h4>
                     <p>📞 <a href="tel:+919886330066">+91 98863 30066</a></p>
                     <p>💬 <a href="https://wa.me/919886933001" target="_blank" rel="noopener">WhatsApp Us</a></p>
-                    <p>📍 Electronic City, Bengaluru, KA</p>
+                    <p>📍 <a href="https://www.google.com/maps/dir/?api=1&destination=37/2,+Vinayaka+Temple,+Pappya+Reddy+Layout,+Garebhavipalya,+Hongasandra,+Bommanahalli,+Bengaluru,+Karnataka+560114" target="_blank" rel="noopener">Electronic City, Bengaluru, KA</a></p>
                     <p>🕐 Mon–Sun: 9:00 AM – 9:00 PM</p>
                     <p>🌐 <a href="https://www.motofixpoint.com">motofixpoint.com</a></p>
                 </div>

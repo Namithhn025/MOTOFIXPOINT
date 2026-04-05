@@ -1,0 +1,15 @@
+{
+  "name": "motofixpoint",
+  "version": "1.0.0",
+  "description": "MotoFixPoint - Car & Bike Repair Workshop Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y vite",
+    "build": "npx -y vite build",
+    "preview": "npx -y vite preview",
+    "sync": "python3 sync_gallery.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

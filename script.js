@@ -155,7 +155,6 @@ function filterServices(type) {
 
 // ===== FORM SUBMIT =====
 function handleFormSubmit(e) {
-  e.preventDefault();
   const btn = document.getElementById('submitBtn');
   const success = document.getElementById('formSuccess');
   const form = document.getElementById('bookingForm');
@@ -167,6 +166,7 @@ function handleFormSubmit(e) {
   const model = document.getElementById('fbike').value.trim();
 
   if (!name || !phone || !vehicleType || !model) {
+    e.preventDefault();
     // Shake animation on required fields
     [document.getElementById('fname'), document.getElementById('fphone'),
      document.getElementById('fvehicle-type'), document.getElementById('fbike')].forEach(field => {
@@ -178,22 +178,27 @@ function handleFormSubmit(e) {
     return;
   }
 
-  // Simulate form submission (replace with real backend / Google Forms integration)
+  // Submission UI
   btn.textContent = '⏳ Sending...';
   btn.disabled = true;
 
+  // Let the form submit to the hidden_iframe
+  // The iframe onload (in index.html) can handle the success state if needed
+  // For now, we'll show success after a short delay
   setTimeout(() => {
     success.style.display = 'block';
     btn.textContent = '✅ Request Sent!';
     btn.style.background = 'linear-gradient(135deg, #22511a 0%, #2e7d23 100%)';
-    form.querySelectorAll('input, select, textarea').forEach(f => f.value = '');
+    
+    // Clear form after submission
     setTimeout(() => {
+      form.reset();
       success.style.display = 'none';
       btn.textContent = '📩 Send Booking Request';
       btn.disabled = false;
       btn.style.background = '';
-    }, 6000);
-  }, 1200);
+    }, 5000);
+  }, 1000);
 }
 
 // ===== ACTIVE NAV LINK ON SCROLL =====

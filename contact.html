@@ -169,28 +169,27 @@
             </div>
 
             <div class="contact-form-card">
-                <form action="#" id="contactForm">
-                    <div class="contact-field">
-                        <label>Your Name</label>
-                        <input type="text" placeholder="John Doe" required />
+                <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScJw9JN20uovZULRHuvK-pioNeHBWvHsAiZVpahF1d4oqQGeA/formResponse" id="contactForm" target="hidden_iframe">
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="font-family: var(--font-head); font-size: 1.8rem; color: var(--white); margin-bottom: 8px;">Quick Callback</h3>
+                        <p style="color: var(--mid); font-size: 0.9rem;">Enter your mobile number — we'll call you back within <span style="color: var(--red); font-weight: 800;">30 minutes</span>.</p>
                     </div>
                     <div class="contact-field">
-                        <label>Mobile Number</label>
-                        <input type="tel" placeholder="+91" required />
+                        <label>Mobile Number *</label>
+                        <input type="tel" name="entry.1330193333" placeholder="10-digit mobile number" required pattern="[0-9]{10}" />
                     </div>
-                    <div class="contact-field">
-                        <label>Message / Requirements (Optional)</label>
-                        <textarea placeholder="Tell us what's wrong with your vehicle" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary btn-full">Send Message</button>
-                    <p id="formFeedback" style="margin-top: 15px; font-size: 0.8rem; color: #22c55e; display: none;">✅ We'll call you back shortly!</p>
+                    
+                    <button type="submit" class="btn-primary btn-full" id="contactSubmitBtn">📞 Request Callback Now</button>
+                    <p id="formFeedback" style="margin-top: 15px; font-size: 0.9rem; color: #22c55e; display: none; text-align: center; font-weight: 600;">✅ Success! We'll call you in 30 mins.</p>
                 </form>
             </div>
         </div>
 
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
         <!-- Google Maps Embed -->
         <div class="map-section">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15555.5!2d77.6250!3d12.8936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae14eb!2sGarebhavipalya!5e0!3m2!1sen!2sin!4v1620000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.37320490!2d77.621245!3d12.8936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae14eb!2s37%2F2,+Vinayaka+Temple,+Pappya+Reddy+Layout,+Garebhavipalya,+Hongasandra,+Bommanahalli,+Bengaluru,+Karnataka+560114!5e0!3m2!1sen!2sin!4v1712211600000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </main>
 
@@ -238,7 +237,7 @@
                     <h4>Contact</h4>
                     <p>📞 <a href="tel:+919886330066">+91 98863 30066</a></p>
                     <p>💬 <a href="https://wa.me/919886933001" target="_blank" rel="noopener">WhatsApp Us</a></p>
-                    <p>📍 Electronic City, Bengaluru, KA</p>
+                    <p>📍 <a href="https://www.google.com/maps/dir/?api=1&destination=37/2,+Vinayaka+Temple,+Pappya+Reddy+Layout,+Garebhavipalya,+Hongasandra,+Bommanahalli,+Bengaluru,+Karnataka+560114" target="_blank" rel="noopener">Electronic City, Bengaluru, KA</a></p>
                     <p>🕐 Mon–Sun: 9:00 AM – 9:00 PM</p>
                     <p>🌐 <a href="https://www.motofixpoint.com">motofixpoint.com</a></p>
                 </div>
@@ -255,10 +254,21 @@
     <script>
         // ── HAMBURGER ──
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('formFeedback').style.display = 'block';
-            setTimeout(() => { document.getElementById('formFeedback').style.display = 'none'; }, 5000);
-            this.reset();
+            const btn = document.getElementById('contactSubmitBtn');
+            btn.textContent = '⏳ Sending...';
+            btn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('formFeedback').style.display = 'block';
+                btn.textContent = '✅ Success!';
+                btn.style.background = '#22c55e';
+                setTimeout(() => { 
+                    document.getElementById('formFeedback').style.display = 'none'; 
+                    btn.textContent = '📞 Request Callback Now';
+                    btn.disabled = false;
+                    btn.style.background = '';
+                    this.reset();
+                }, 5000);
+            }, 1000);
         });
 
         // ── HAMBURGER ──
